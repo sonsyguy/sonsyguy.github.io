@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="JS继承的几种方法总结">
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/default" title="Hexo">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://ubuff.cn/2019/04/21/hello-world/">
+
+
+<meta name="description" content="由于js不像java那样是真正面向对象的语言，js是基于对象的，它没有类的概念所以，要想实现继承，可以用js的原型prototype机制或者用apply和call方法去实现。在面向对象的语言中，我们使用类来创建一个自定义对象。然而js中所有事物都是对象，那么用什么办法来创建自定义对象呢？这就需要用到js的原型：我们可以简单的把prototype看做是一个模版，新创建的自定义对象都是这个模版（pro">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS继承的几种方法总结">
+<meta property="og:url" content="http://ubuff.cn/2019/04/21/hello-world/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="由于js不像java那样是真正面向对象的语言，js是基于对象的，它没有类的概念所以，要想实现继承，可以用js的原型prototype机制或者用apply和call方法去实现。在面向对象的语言中，我们使用类来创建一个自定义对象。然而js中所有事物都是对象，那么用什么办法来创建自定义对象呢？这就需要用到js的原型：我们可以简单的把prototype看做是一个模版，新创建的自定义对象都是这个模版（pro">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-04-21T14:26:53.980Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS继承的几种方法总结">
+<meta name="twitter:description" content="由于js不像java那样是真正面向对象的语言，js是基于对象的，它没有类的概念所以，要想实现继承，可以用js的原型prototype机制或者用apply和call方法去实现。在面向对象的语言中，我们使用类来创建一个自定义对象。然而js中所有事物都是对象，那么用什么办法来创建自定义对象呢？这就需要用到js的原型：我们可以简单的把prototype看做是一个模版，新创建的自定义对象都是这个模版（pro">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> JS继承的几种方法总结 - Hexo </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">ubuff</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          JS继承的几种方法总结
+        
+      </h1>
+
+      <time class="post-time">
+          Apr 21 2019
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>由于js不像java那样是真正面向对象的语言，js是基于对象的，它没有类的概念<br>所以，要想实现继承，可以用js的原型prototype机制或者用apply和call方法去实现。在面向对象的语言中，我们使用类来创建一个自定义对象。然而js中所有事物都是对象，那么用什么办法来创建自定义对象呢？<br>这就需要用到js的原型：我们可以简单的把prototype看做是一个模版，新创建的自定义对象都是这个模版（prototype）的一个拷贝 （实际上不是拷贝而是链接，只不过这种链接是不可见，新实例化的对象内部有一个看不见的Proto指针，指向原型对象）。</p>
+<h3 id="1、继承第一种方式：对象冒充"><a href="#1、继承第一种方式：对象冒充" class="headerlink" title="1、继承第一种方式：对象冒充"></a>1、继承第一种方式：对象冒充</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">blogfunction Parent(username)&#123;</span><br><span class="line">    this.username = username;</span><br><span class="line">    this.hello = function()&#123;</span><br><span class="line">      console.log(&apos;hello &apos; + this.username);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">Parent.prototype.sayMorning = function()&#123;</span><br><span class="line">	console.log(&apos;good morning &apos; + this.username);</span><br><span class="line">&#125;</span><br><span class="line">  function Child(username,password)&#123;</span><br><span class="line">    //通过以下3行实现将Parent的属性和方法追加到Child中，从而实现继承</span><br><span class="line">    //第一步：this.method是作为一个临时的属性，并且指向Parent所指向的对象，</span><br><span class="line">    //第二步：执行this.method方法，即执行Parent所指向的对象函数</span><br><span class="line">    //第三步：销毁this.method属性，即此时Child就已经拥有了Parent的所有属性和方法</span><br><span class="line">    this.method = Parent;</span><br><span class="line">    this.method(username);//最关键的一行</span><br><span class="line">    delete this.method;</span><br><span class="line"></span><br><span class="line">     this.password = password;</span><br><span class="line">    this.world = function()&#123;</span><br><span class="line">      console.log(this.password);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  var parent = new Parent(&quot;zhangsan&quot;);</span><br><span class="line">  var child = new Child(&quot;lisi&quot;,&quot;123456&quot;);</span><br><span class="line">  parent.hello();</span><br><span class="line">  parent.sayMorning();</span><br><span class="line">  child.hello();</span><br><span class="line">  child.world();</span><br></pre></td></tr></table></figure>
+<h3 id="2、继承第二种方式：call-方法方式"><a href="#2、继承第二种方式：call-方法方式" class="headerlink" title="2、继承第二种方式：call()方法方式"></a>2、继承第二种方式：call()方法方式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">function Parent(username)&#123;</span><br><span class="line">    this.username = username;</span><br><span class="line">    this.hello = function()&#123;</span><br><span class="line">      console.log(this.username);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">Parent.prototype.sayMorning = function()&#123;</span><br><span class="line">		console.log(&apos;good morning &apos; + this.username);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">  function Child(username,password)&#123;</span><br><span class="line">    Parent.call(this,username);</span><br><span class="line"></span><br><span class="line">    this.password = password;</span><br><span class="line">    this.world = function()&#123;</span><br><span class="line">      console.log(this.password);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  var parent = new Parent(&quot;zhangsan&quot;);</span><br><span class="line">  var child = new Child(&quot;lisi&quot;,&quot;123456&quot;);</span><br><span class="line">  parent.hello();</span><br><span class="line">  parent.sayMorning();</span><br><span class="line">  child.hello();</span><br><span class="line">  child.world();</span><br><span class="line">// child.sayMorning();  通过prototype 添加的方法和属性，不能用来继承</span><br></pre></td></tr></table></figure>
+<h3 id="3、继承的第三种方式：apply-方法方式"><a href="#3、继承的第三种方式：apply-方法方式" class="headerlink" title="3、继承的第三种方式：apply()方法方式"></a>3、继承的第三种方式：apply()方法方式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">function Parent(username)&#123;</span><br><span class="line">    this.username = username;</span><br><span class="line">    this.hello = function()&#123;</span><br><span class="line">      console.log(this.username);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">	Parent.prototype.sayMorning = function()&#123;</span><br><span class="line">		console.log(&apos;good morning &apos; + this.username);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">  function Child(username,password)&#123;</span><br><span class="line">    Parent.apply(this,new Array(username));</span><br><span class="line"></span><br><span class="line">    this.password = password;</span><br><span class="line">    this.world = function()&#123;</span><br><span class="line">      console.log(this.password);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">var parent = new Parent(&quot;zhangsan&quot;);</span><br><span class="line">  var child = new Child(&quot;lisi&quot;,&quot;123456&quot;);</span><br><span class="line">  parent.hello();</span><br><span class="line">  parent.sayMorning();</span><br><span class="line">  child.hello();</span><br><span class="line">  child.world();</span><br><span class="line">// child.sayMorning(); 通过prototype 添加的方法和属性，不能用来继承</span><br></pre></td></tr></table></figure>
+<h3 id="4、继承的第四种方式：原型链方式，即子类通过prototype将所有在父类中通过prototype追加的属性和方法都追加到Child，从而实现了继承"><a href="#4、继承的第四种方式：原型链方式，即子类通过prototype将所有在父类中通过prototype追加的属性和方法都追加到Child，从而实现了继承" class="headerlink" title="4、继承的第四种方式：原型链方式，即子类通过prototype将所有在父类中通过prototype追加的属性和方法都追加到Child，从而实现了继承"></a>4、继承的第四种方式：原型链方式，即子类通过prototype将所有在父类中通过prototype追加的属性和方法都追加到Child，从而实现了继承</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">function Person()&#123;</span><br><span class="line">  &#125;</span><br><span class="line">  Person.prototype.hello = &quot;hello&quot;;</span><br><span class="line">  Person.prototype.sayHello = function()&#123;</span><br><span class="line">    console.log(this.hello);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function Child()&#123;</span><br><span class="line">  &#125;</span><br><span class="line">  Child.prototype = new Person();//这行的作用是：将Parent中将所有通过prototype追加的属性和方法都追加到Child，从而实现了继承</span><br><span class="line">  Child.prototype.world = &quot;world&quot;;</span><br><span class="line">  Child.prototype.sayWorld = function()&#123;</span><br><span class="line">    console.log(this.world);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  var c = new Child();</span><br><span class="line">  c.sayHello();</span><br><span class="line">  c.sayWorld();</span><br><span class="line">通过prototype 添加的方法和属性，不能用来继承</span><br></pre></td></tr></table></figure>
+<h3 id="5、继承的第五种方式：混合方式-混合了call或者apply方式、原型链方式"><a href="#5、继承的第五种方式：混合方式-混合了call或者apply方式、原型链方式" class="headerlink" title="5、继承的第五种方式：混合方式, 混合了call或者apply方式、原型链方式"></a>5、继承的第五种方式：混合方式, 混合了call或者apply方式、原型链方式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">function Parent(hello)&#123;</span><br><span class="line">    this.hello = hello;</span><br><span class="line">  &#125;</span><br><span class="line">  Parent.prototype.sayHello = function()&#123;</span><br><span class="line">    console.log(this.hello);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  function Child(hello,world)&#123;</span><br><span class="line">    Parent.call(this,hello);//将父类的属性继承过来</span><br><span class="line">    this.world = world;//新增一些属性</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  Child.prototype = new Parent();//将父类的方法继承过来</span><br><span class="line"></span><br><span class="line">  Child.prototype.sayWorld = function()&#123;//新增一些方法</span><br><span class="line">    console.log(this.world);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  var c = new Child(&quot;zhangsan&quot;,&quot;lisi&quot;);</span><br><span class="line">  c.sayHello();</span><br><span class="line">  c.sayWorld();</span><br><span class="line">可以继承通过prototype 添加的方法和属性</span><br></pre></td></tr></table></figure>
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+
+        
+        
+  <nav class="post-nav">
+    
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Ubuff.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>
