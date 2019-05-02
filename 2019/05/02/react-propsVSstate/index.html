@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="react:propsVSstate">
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/default" title="Hexo">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://wx2.sinaimg.cn/mw690/007K0uxpgy1g2bo23l8djj300w00wq2p.jpg">
+
+
+
+<link rel="canonical" href="http://ubuff.cn/2019/05/02/react-propsVSstate/">
+
+
+<meta name="description" content="React之Props，及与state的区别组件内可以通过props来获得属性值，看下面的实例先来回顾 一下Props最基本的使用： 1234567891011121314151617181920212223242526272829&amp;lt;!DOCTYPE html&amp;gt;&amp;lt;html lang=&amp;quot;en&amp;quot;&amp;gt;&amp;lt;head&amp;gt;    &amp;lt;meta charse">
+<meta property="og:type" content="article">
+<meta property="og:title" content="react:propsVSstate">
+<meta property="og:url" content="http://ubuff.cn/2019/05/02/react-propsVSstate/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="React之Props，及与state的区别组件内可以通过props来获得属性值，看下面的实例先来回顾 一下Props最基本的使用： 1234567891011121314151617181920212223242526272829&amp;lt;!DOCTYPE html&amp;gt;&amp;lt;html lang=&amp;quot;en&amp;quot;&amp;gt;&amp;lt;head&amp;gt;    &amp;lt;meta charse">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-05-02T08:55:03.633Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="react:propsVSstate">
+<meta name="twitter:description" content="React之Props，及与state的区别组件内可以通过props来获得属性值，看下面的实例先来回顾 一下Props最基本的使用： 1234567891011121314151617181920212223242526272829&amp;lt;!DOCTYPE html&amp;gt;&amp;lt;html lang=&amp;quot;en&amp;quot;&amp;gt;&amp;lt;head&amp;gt;    &amp;lt;meta charse">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> react:propsVSstate - Hexo </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">ubuff</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          react:propsVSstate
+        
+      </h1>
+
+      <time class="post-time">
+          May 02 2019
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <h2 id="React之Props，及与state的区别"><a href="#React之Props，及与state的区别" class="headerlink" title="React之Props，及与state的区别"></a>React之Props，及与state的区别</h2><p>组件内可以通过props来获得属性值，看下面的实例先来回顾 一下Props最基本的使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">    &lt;title&gt;Title&lt;/title&gt;</span><br><span class="line">    &lt;script src=&quot;https://zhangpeiyue.com/wp-content/uploads/2018/08/react.development.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">    &lt;script src=&quot;https://zhangpeiyue.com/wp-content/uploads/2018/08/react-dom.development.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">    &lt;script src=&quot;https://zhangpeiyue.com/wp-content/uploads/2018/08/babel.min_.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;div id=&quot;wrap&quot;&gt;&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;script type=&quot;text/babel&quot;&gt;</span><br><span class="line">    class MyComponent extends React.Component &#123;</span><br><span class="line">        //此处的构造器是可以省略的</span><br><span class="line">        constructor(props)&#123;</span><br><span class="line">            super(props);</span><br><span class="line">        &#125;</span><br><span class="line">        render() &#123;</span><br><span class="line">            return &lt;div&gt;好神奇！ &#123;this.props.siteName&#125;!&lt;/div&gt;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    var element = &lt;MyComponent siteName=&quot;zhangpeiyue.com&quot;/&gt;;</span><br><span class="line">    ReactDOM.render(</span><br><span class="line">        element,</span><br><span class="line">        document.querySelector(&quot;#wrap&quot;)</span><br><span class="line">    );</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p>通过以上实例咱们知道通过props可以得到组件MyComponent的属性siteName的值。</p>
+<h3 id="通过defaultProps添加默认Props"><a href="#通过defaultProps添加默认Props" class="headerlink" title="通过defaultProps添加默认Props"></a>通过defaultProps添加默认Props</h3><p>咱们可以通过为组件类添加defaultProps属性来为props设置默认值。defaultProps是一个对象，只要将添加的值放到defaultProps的属性中即可，例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class MyComponent extends React.Component &#123;</span><br><span class="line">    render() &#123;</span><br><span class="line">        //此处返回   &lt;div&gt;小张今年18岁了&lt;/div&gt;</span><br><span class="line">        return &lt;div&gt;</span><br><span class="line">            &#123;this.props.userName&#125;今年&#123;this.props.age&#125;岁了！</span><br><span class="line">        &lt;/div&gt;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//为组件添加默认属性 userName与age</span><br><span class="line">MyComponent.defaultProps=&#123;</span><br><span class="line">    userName:&quot;小张&quot;,</span><br><span class="line">    age:18</span><br><span class="line">&#125;</span><br><span class="line">var element = &lt;MyComponent/&gt;;</span><br><span class="line">ReactDOM.render(</span><br><span class="line">    element,</span><br><span class="line">    document.querySelector(&quot;#wrap&quot;)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h3 id="State和Props"><a href="#State和Props" class="headerlink" title="State和Props"></a>State和Props</h3><p>咱们可以通过在父组件当中设置State，然后通过在子组件上使用props来接收收父组件的state值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">//父组件</span><br><span class="line">class MyComponent extends React.Component &#123;</span><br><span class="line">    constructor()&#123;</span><br><span class="line">        super();</span><br><span class="line">        //设置sate,添加name与age属性</span><br><span class="line">        this.state=&#123;</span><br><span class="line">            name:&quot;张培跃&quot;,</span><br><span class="line">            age:18</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    render() &#123;</span><br><span class="line">        return &lt;div&gt;</span><br><span class="line">            &lt;Name name=&#123;this.state.name&#125;/&gt;</span><br><span class="line">            &lt;Age age=&#123;this.state.age&#125;/&gt;</span><br><span class="line">        &lt;/div&gt;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//子组件Name</span><br><span class="line">class Name extends React.Component&#123;</span><br><span class="line">    render()&#123;</span><br><span class="line">        return &lt;div&gt;&#123;this.props.name&#125;&lt;/div&gt;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//子组件Age</span><br><span class="line">class Age extends React.Component&#123;</span><br><span class="line">    render()&#123;</span><br><span class="line">        return &lt;div&gt;&#123;this.props.age&#125;&lt;/div&gt;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">var element = &lt;MyComponent/&gt;;</span><br><span class="line">ReactDOM.render(</span><br><span class="line">    element,</span><br><span class="line">    document.querySelector(&quot;#wrap&quot;)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h3 id="使用PropTypes进行类型检测"><a href="#使用PropTypes进行类型检测" class="headerlink" title="使用PropTypes进行类型检测"></a>使用PropTypes进行类型检测</h3><p>为了保证咱们的组件被正确使用，React提供了可以对Props进行验证的功能PropTypes。PropTypes为组件类自身的属性，提供了很多验证器，来验证传入的数据是否有效。当传入的数据无效时，JavaScript控制台会抛出警告。<br>另外需要注意的是，在开发环境下，当你使用了一个无效的值作为prop时，控件台会出现警告;在生产环境下，为了性能考虑会将PropTypes忽略掉！<br>要想使用propTypes,首先要对prop-type.js文件进行引入。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=&quot;https://zhangpeiyue.com/wp-content/uploads/2018/08/prop-types.js&quot;&gt;&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>具体使用，可看以下示例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">var name=&quot;老大&quot;</span><br><span class="line">var age=18;</span><br><span class="line">class MyComponent extends React.Component &#123;</span><br><span class="line">    render() &#123;</span><br><span class="line">        return &lt;div&gt;</span><br><span class="line">            &#123;this.props.name&#125;今年&#123;this.props.age&#125;岁了！</span><br><span class="line">        &lt;/div&gt;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//propTypes是组件类的静态属性</span><br><span class="line">MyComponent.propTypes=&#123;</span><br><span class="line">    //将name设置为string类型</span><br><span class="line">    name:PropTypes.string,</span><br><span class="line">    //将age设置为number类型</span><br><span class="line">    age:PropTypes.number</span><br><span class="line">&#125;;</span><br><span class="line">var element = &lt;MyComponent name=&#123;name&#125; age=&#123;age&#125; /&gt;;</span><br><span class="line">ReactDOM.render(</span><br><span class="line">    element,</span><br><span class="line">    document.querySelector(&quot;#wrap&quot;)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>以上示例当中的name与age不合法时，会弹出类型不符的警告！所以在项目开发中使用PropTypes进行对props的验证还是很有好处的！<br>更多验证器说明如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">MyComponent.propTypes = &#123;</span><br><span class="line">    // 可以声明 prop 为指定的 JS 基本数据类型，默认情况，这些数据是可选的</span><br><span class="line">   optionalArray: React.PropTypes.array,</span><br><span class="line">    optionalBool: React.PropTypes.bool,</span><br><span class="line">    optionalFunc: React.PropTypes.func,</span><br><span class="line">    optionalNumber: React.PropTypes.number,</span><br><span class="line">    optionalObject: React.PropTypes.object,</span><br><span class="line">    optionalString: React.PropTypes.string,</span><br><span class="line"> </span><br><span class="line">    // 可以被渲染的对象 numbers, strings, elements 或 array</span><br><span class="line">    optionalNode: React.PropTypes.node,</span><br><span class="line"> </span><br><span class="line">    //  React 元素</span><br><span class="line">    optionalElement: React.PropTypes.element,</span><br><span class="line"> </span><br><span class="line">    // 用 JS 的 instanceof 操作符声明 prop 为类的实例。</span><br><span class="line">    optionalMessage: React.PropTypes.instanceOf(Message),</span><br><span class="line"> </span><br><span class="line">    // 用 enum 来限制 prop 只接受指定的值。</span><br><span class="line">    optionalEnum: React.PropTypes.oneOf([&apos;News&apos;, &apos;Photos&apos;]),</span><br><span class="line"> </span><br><span class="line">    // 可以是多个对象类型中的一个</span><br><span class="line">    optionalUnion: React.PropTypes.oneOfType([</span><br><span class="line">      React.PropTypes.string,</span><br><span class="line">      React.PropTypes.number,</span><br><span class="line">      React.PropTypes.instanceOf(Message)</span><br><span class="line">    ]),</span><br><span class="line"> </span><br><span class="line">    // 指定类型组成的数组</span><br><span class="line">    optionalArrayOf: React.PropTypes.arrayOf(React.PropTypes.number),</span><br><span class="line"> </span><br><span class="line">    // 指定类型的属性构成的对象</span><br><span class="line">    optionalObjectOf: React.PropTypes.objectOf(React.PropTypes.number),</span><br><span class="line"> </span><br><span class="line">    // 特定 shape 参数的对象</span><br><span class="line">    optionalObjectWithShape: React.PropTypes.shape(&#123;</span><br><span class="line">      color: React.PropTypes.string,</span><br><span class="line">      fontSize: React.PropTypes.number</span><br><span class="line">    &#125;),</span><br><span class="line"> </span><br><span class="line">    // 任意类型加上 `isRequired` 来使 prop 不可空。</span><br><span class="line">    requiredFunc: React.PropTypes.func.isRequired,</span><br><span class="line"> </span><br><span class="line">    // 不可空的任意类型</span><br><span class="line">    requiredAny: React.PropTypes.any.isRequired,</span><br><span class="line"> </span><br><span class="line">    // 自定义验证器。如果验证失败需要返回一个 Error 对象。不要直接使用 `console.warn` 或抛异常，因为这样 `oneOfType` 会失效。</span><br><span class="line">    customProp: function(props, propName, componentName) &#123;</span><br><span class="line">      if (!/matchme/.test(props[propName])) &#123;</span><br><span class="line">        return new Error(&apos;Validation failed!&apos;);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="现在我们来总结下-props与state的区别："><a href="#现在我们来总结下-props与state的区别：" class="headerlink" title="现在我们来总结下,props与state的区别："></a>现在我们来总结下,props与state的区别：</h4><p>– props是指组件间传递的一种方式，props自然也可以传递state。由于React的数据流是自上而下的，所以是从父组件向子组件进行传递；另外组件内部的this.props属性是只读的不可修改！<br>– state是组件内部的状态（数据），不能够直接修改，必须要通过setState来改变值的状态，从而达到更新组件内部数据的作用。</p>
+<h4 id="props和state是经常要结合使用的，父组件的state可以转化为props来为子组件进行传值。在这种情况下，子组件接收的props是只读的，想要改变值，只能通过父组件的state对其进行更改。"><a href="#props和state是经常要结合使用的，父组件的state可以转化为props来为子组件进行传值。在这种情况下，子组件接收的props是只读的，想要改变值，只能通过父组件的state对其进行更改。" class="headerlink" title="props和state是经常要结合使用的，父组件的state可以转化为props来为子组件进行传值。在这种情况下，子组件接收的props是只读的，想要改变值，只能通过父组件的state对其进行更改。"></a>props和state是经常要结合使用的，父组件的state可以转化为props来为子组件进行传值。在这种情况下，子组件接收的props是只读的，想要改变值，只能通过父组件的state对其进行更改。</h4>
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+
+        
+        
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/2019/05/02/hello-world/">
+        <span class="next-text nav-default">JS继承的几种方法总结</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Ubuff.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>
