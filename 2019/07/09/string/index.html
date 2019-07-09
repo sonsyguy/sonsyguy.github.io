@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="es5&es6 string">
+
+
+
+
+  <meta name="keywords" content="String(es5&es6),">
+
+
+
+
+
+  <link rel="alternate" href="/default" title="Hexo">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://wx2.sinaimg.cn/mw690/007K0uxpgy1g2bo23l8djj300w00wq2p.jpg">
+
+
+
+<link rel="canonical" href="http://ubuff.cn/2019/07/09/string/">
+
+
+<meta name="description" content="es5 =&amp;gt; JS字符串操作汇总 字符串转换  字符串转换是最基础的要求和工作，你可以将任何类型的数据都转换为字符串，你可以用下面三种方法的任何一种：12var num=24;var mystr=num.toString();    //&quot;24&quot; 你同样可以这么做： 12var num=24;var mystr=num.toString();    //&quot;24&quot; 或者，在简单点儿： 12va">
+<meta name="keywords" content="String(es5&amp;es6)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="es5&amp;es6 string">
+<meta property="og:url" content="http://ubuff.cn/2019/07/09/string/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="es5 =&amp;gt; JS字符串操作汇总 字符串转换  字符串转换是最基础的要求和工作，你可以将任何类型的数据都转换为字符串，你可以用下面三种方法的任何一种：12var num=24;var mystr=num.toString();    //&quot;24&quot; 你同样可以这么做： 12var num=24;var mystr=num.toString();    //&quot;24&quot; 或者，在简单点儿： 12va">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-07-09T14:16:25.461Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="es5&amp;es6 string">
+<meta name="twitter:description" content="es5 =&amp;gt; JS字符串操作汇总 字符串转换  字符串转换是最基础的要求和工作，你可以将任何类型的数据都转换为字符串，你可以用下面三种方法的任何一种：12var num=24;var mystr=num.toString();    //&quot;24&quot; 你同样可以这么做： 12var num=24;var mystr=num.toString();    //&quot;24&quot; 或者，在简单点儿： 12va">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> es5&es6 string - Hexo </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">ubuff</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          es5&es6 string
+        
+      </h1>
+
+      <time class="post-time">
+          Jul 09 2019
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <h2 id="es5-gt-JS字符串操作汇总"><a href="#es5-gt-JS字符串操作汇总" class="headerlink" title="es5 =&gt; JS字符串操作汇总"></a>es5 =&gt; JS字符串操作汇总</h2><ol>
+<li>字符串转换</li>
+</ol>
+<p>字符串转换是最基础的要求和工作，你可以将任何类型的数据都转换为字符串，你可以用下面三种方法的任何一种：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num=<span class="number">24</span>;</span><br><span class="line"><span class="keyword">var</span> mystr=num.toString();    <span class="comment">//"24"</span></span><br></pre></td></tr></table></figure></p>
+<p>你同样可以这么做：<br> <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num=<span class="number">24</span>;</span><br><span class="line"><span class="keyword">var</span> mystr=num.toString();    <span class="comment">//"24"</span></span><br></pre></td></tr></table></figure></p>
+<p>或者，在简单点儿：<br> <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num=<span class="number">24</span>;</span><br><span class="line"><span class="keyword">var</span> mystr=<span class="string">""</span> + num;    <span class="comment">//"24"</span></span><br></pre></td></tr></table></figure></p>
+<ol start="2">
+<li>字符串分割</li>
+</ol>
+<p>将字符串进行拆分返回一个新的数组，JavaScript就给我们提供了一个非常方便的函数：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mystr=<span class="string">"qingchenghuwoguoxiansheng,woaishenghuo,woaiziji"</span>;</span><br><span class="line"><span class="keyword">var</span> arr1=mystr.split(<span class="string">","</span>);    <span class="comment">//["qingchenghuwoguoxiansheng","woaishenghuo","woaiziji"];</span></span><br><span class="line"><span class="keyword">var</span> arr2=mystr.split(<span class="string">""</span>);        <span class="comment">//["q","i","n","g","c","h","e","n","g","h","u","w","o","g","u","o","x","i","a","n","s","h","e","n","g",",","w","o","a","i","s","h","e","n","g","h","u","o",",","w","o","a","i","z","i","j","i"];</span></span><br></pre></td></tr></table></figure></p>
+<p>split()的第二个参数，表示返回的字符串数组的最大长度<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> mystr=<span class="string">"qingchenghuwoguoxiansheng,woaishenghuo,woaiziji"</span>;</span><br><span class="line"><span class="keyword">var</span> arr1=mystr.split(<span class="string">","</span>,<span class="number">2</span>); <span class="comment">//["qingchenghuwoguoxiansheng","woaishenghuo"];</span></span><br><span class="line"><span class="keyword">var</span> arr2=mystr.split(<span class="string">""</span>,<span class="number">8</span>); <span class="comment">//["q","i","n","g","c","h","e","n"];</span></span><br></pre></td></tr></table></figure></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/String-es5-es6/">String(es5&es6)</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/2019/05/02/react-propsVSstate/">
+        <span class="next-text nav-default">react:propsVSstate</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Ubuff.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>
