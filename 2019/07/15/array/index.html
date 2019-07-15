@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang>
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="array">
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/default" title="Hexo">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="https://wx2.sinaimg.cn/mw690/007K0uxpgy1g2bo23l8djj300w00wq2p.jpg">
+
+
+
+<link rel="canonical" href="http://ubuff.cn/2019/07/15/array/">
+
+
+<meta name="description" content="es5&amp;amp;&amp;amp;es6 =&amp;gt; JS数组操作汇总 Array.map()  此方法是将数组中的每个元素调用一个提供的函数，结果作为一个新的数组返回，并没有改变原来的数组1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859">
+<meta property="og:type" content="article">
+<meta property="og:title" content="array">
+<meta property="og:url" content="http://ubuff.cn/2019/07/15/array/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="es5&amp;amp;&amp;amp;es6 =&amp;gt; JS数组操作汇总 Array.map()  此方法是将数组中的每个元素调用一个提供的函数，结果作为一个新的数组返回，并没有改变原来的数组1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-07-15T13:31:59.053Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="array">
+<meta name="twitter:description" content="es5&amp;amp;&amp;amp;es6 =&amp;gt; JS数组操作汇总 Array.map()  此方法是将数组中的每个元素调用一个提供的函数，结果作为一个新的数组返回，并没有改变原来的数组1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: false
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> array - Hexo </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">ubuff</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          array
+        
+      </h1>
+
+      <time class="post-time">
+          Jul 15 2019
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <h2 id="es5-amp-amp-es6-gt-JS数组操作汇总"><a href="#es5-amp-amp-es6-gt-JS数组操作汇总" class="headerlink" title="es5&amp;&amp;es6 =&gt; JS数组操作汇总"></a>es5&amp;&amp;es6 =&gt; JS数组操作汇总</h2><ol>
+<li>Array.map()</li>
+</ol>
+<p>此方法是将数组中的每个元素调用一个提供的函数，结果作为一个新的数组返回，并没有改变原来的数组<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line">    <span class="keyword">let</span> newArr = arr.map(<span class="function"><span class="params">x</span> =&gt;</span> x*<span class="number">2</span>)</span><br><span class="line">    <span class="comment">//arr= [1, 2, 3, 4, 5]   原数组保持不变</span></span><br><span class="line">    <span class="comment">//newArr = [2, 4, 6, 8, 10] 返回新数组</span></span><br><span class="line"><span class="string">``</span><span class="string">`　　</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">2. Array.forEach()</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">此方法是将数组中的每个元素执行传进提供的函数，没有返回值，直接改变原数组，注意和map方法区分</span></span><br><span class="line"><span class="string">`</span><span class="string">``</span>javaScript</span><br><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line">   num.forEach(<span class="function"><span class="params">x</span> =&gt;</span> x*<span class="number">2</span>)</span><br><span class="line">   <span class="comment">// arr = [2, 4, 6, 8, 10]  数组改变,注意和map区分</span></span><br><span class="line"><span class="string">``</span><span class="string">`　</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">3. Array.filter()</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">此方法是将所有元素进行判断，将满足条件的元素作为一个新的数组返回</span></span><br><span class="line"><span class="string">`</span><span class="string">``</span>javaScript</span><br><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line">    <span class="keyword">const</span> isBigEnough =&gt; <span class="function"><span class="params">value</span> =&gt;</span> value &gt;= <span class="number">3</span></span><br><span class="line">    <span class="keyword">let</span> newArr = arr.filter(isBigEnough )</span><br><span class="line">    <span class="comment">//newNum = [3, 4, 5] 满足条件的元素返回为一个新的数组</span></span><br><span class="line"><span class="string">``</span><span class="string">`　　</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">4. Array.every()</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">此方法是将所有元素进行判断返回一个布尔值，如果所有元素都满足判断条件，则返回true，否则为false：</span></span><br><span class="line"><span class="string">`</span><span class="string">``</span>javaScript</span><br><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line">    <span class="keyword">const</span> isLessThan4 =&gt; <span class="function"><span class="params">value</span> =&gt;</span> value &lt; <span class="number">4</span></span><br><span class="line">    <span class="keyword">const</span> isLessThan6 =&gt; <span class="function"><span class="params">value</span> =&gt;</span> value &lt; <span class="number">6</span></span><br><span class="line">    arr.every(isLessThan4 ) <span class="comment">//false</span></span><br><span class="line">    arr.every(isLessThan6 ) <span class="comment">//true</span></span><br><span class="line"><span class="string">``</span><span class="string">`　</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">5. Array.some()</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> 此方法是将所有元素进行判断返回一个布尔值，如果存在元素都满足判断条件，则返回true，若所有元素都不满足判断条件，则返回false：</span></span><br><span class="line"><span class="string">`</span><span class="string">``</span>javaScript</span><br><span class="line"><span class="keyword">let</span> arr= [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line">    <span class="keyword">const</span> isLessThan4 =&gt; <span class="function"><span class="params">value</span> =&gt;</span> value &lt; <span class="number">4</span></span><br><span class="line">    <span class="keyword">const</span> isLessThan6 =&gt; <span class="function"><span class="params">value</span> =&gt;</span> value &gt; <span class="number">6</span></span><br><span class="line">    arr.some(isLessThan4 ) <span class="comment">//true</span></span><br><span class="line">    arr.some(isLessThan6 ) <span class="comment">//false</span></span><br><span class="line"><span class="string">``</span><span class="string">`　　　</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">6. Array.reduce()</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> 此方法是所有元素调用返回函数，返回值为最后结果,传入的值必须是函数类型：</span></span><br><span class="line"><span class="string">`</span><span class="string">``</span>javaScript</span><br><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line">   <span class="keyword">const</span> add = <span class="function">(<span class="params">a, b</span>) =&gt;</span> a + b</span><br><span class="line">   <span class="keyword">let</span> sum = arr.reduce(add)</span><br><span class="line">   <span class="comment">//sum = 15  相当于累加的效果</span></span><br><span class="line"><span class="string">``</span><span class="string">`　</span></span><br><span class="line"><span class="string">   与之相对应的还有一个 Array.reduceRight() 方法，区别是这个是从右向左操作的</span></span><br><span class="line"><span class="string">　</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">7. Array.push()</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"> 此方法是在数组的后面添加新加元素，此方法改变了数组的长度：</span></span><br><span class="line"><span class="string"> `</span><span class="string">``</span>javaScript</span><br><span class="line"><span class="keyword">let</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line">    arr.push(<span class="number">6</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(arr) <span class="comment">//[1, 2, 3, 4, 5, 6]</span></span><br><span class="line">    <span class="built_in">console</span>.log(arr.length) <span class="comment">//6</span></span><br></pre></td></tr></table></figure></p>
+<ol start="8">
+<li><p>Array.pop()</p>
+<p>此方法在数组后面删除最后一个元素，并返回数组，此方法改变了数组的长度：<br><code>javaScript
+let arr = [1, 2, 3, 4, 5]
+ arr.pop()
+ console.log(arr) //[1, 2, 3, 4]
+ console.log(arr.length) //4</code>　</p>
+</li>
+<li><p>Array.shift()</p>
+<p>此方法在数组后面删除第一个元素，并返回数组，此方法改变了数组的长度：<br><code>javaScript
+let arr = [1, 2, 3, 4, 5]
+ arr.shift()
+ console.log(arr) //[2, 3, 4, 5]
+ console.log(arr.length) //4</code>　　　</p>
+</li>
+<li><p>Array.unshift()</p>
+<p>此方法是将一个或多个元素添加到数组的开头，并返回新数组的长度：<br><code>javaScript
+let arr = [1, 2, 3, 4, 5]
+arr.unshift(6, 7)
+console.log(arr) //[6, 7, 1, 2, 3, 4, 5]
+console.log(arr.length) //7</code>　</p>
+</li>
+<li><p>Array.isArray()</p>
+<p>判断一个对象是不是数组，返回的是布尔值</p>
+</li>
+<li><p>Array.concat()</p>
+<p>此方法是一个可以将多个数组拼接成一个数组：<br><code>javaScript
+let arr1 = [1, 2, 3]
+  arr2 = [4, 5]
+let arr = arr1.concat(arr2)
+console.log(arr)//[1, 2, 3, 4, 5]</code>　　</p>
+</li>
+<li><p>Array.toString()</p>
+<p>此方法将数组转化为字符串：<br><code>javaScript
+let arr = [1, 2, 3, 4, 5];
+let str = arr.toString()
+console.log(str)// 1,2,3,4,5</code>　　</p>
+</li>
+<li><p>Array.join()</p>
+<p>此方法也是将数组转化为字符串：<br><code>javaScript
+let arr = [1, 2, 3, 4, 5];
+let str1 = arr.toString()
+let str2 = arr.toString(&#39;,&#39;)
+let str3 = arr.toString(&#39;##&#39;)
+console.log(str1)// 12345
+console.log(str2)// 1,2,3,4,5
+console.log(str3)// 1##2##3##4##5</code>　　<br>通过例子可以看出和toString的区别，可以设置元素之间的间隔~ </p>
+</li>
+<li><p>Array.splice(开始位置， 删除的个数，元素)<br>万能方法，可以实现增删改：</p>
+</li>
+</ol>
+<p><code>javaScript
+let arr = [1, 2, 3, 4, 5];
+     let arr1 = arr.splice(2, 0 &#39;haha&#39;)
+     let arr2 = arr.splice(2, 3)
+     let arr1 = arr.splice(2, 1 &#39;haha&#39;)
+     console.log(arr1) //[1, 2, &#39;haha&#39;, 3, 4, 5]新增一个元素
+     console.log(arr2) //[1, 2] 删除三个元素
+     console.log(arr3) //[1, 2, &#39;haha&#39;, 4, 5] 替换一个元素</code>　     </p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+
+        
+        
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/2019/07/09/string/">
+        <span class="next-text nav-default">es5&es6 string</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2014 -
+    
+    2019
+    <span class="footer-author">Ubuff.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>
