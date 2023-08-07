@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="如何实现上拉加载，下拉刷新？一、前言下拉刷新和上拉加载这两种交互方式通常出现在移动端中 本质上等同于PC网页中的分页，只是交互形式不同 开源社区也有很多优秀的解决方案，如iscroll、better-scroll、pulltorefresh.js库等等 这些第三方库使用起来非常便捷 我们通过原生的方式实现一次上拉加载，下拉刷新，有助于对第三方库有更好的理解与使用 二、实现原理上拉加载及下拉刷新都依">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何实现上拉加载，下拉刷新？">
+<meta property="og:url" content="http://example.com/2019/08/05/js-pull-up-loading-pull-down/index.html">
+<meta property="og:site_name" content="HeLife">
+<meta property="og:description" content="如何实现上拉加载，下拉刷新？一、前言下拉刷新和上拉加载这两种交互方式通常出现在移动端中 本质上等同于PC网页中的分页，只是交互形式不同 开源社区也有很多优秀的解决方案，如iscroll、better-scroll、pulltorefresh.js库等等 这些第三方库使用起来非常便捷 我们通过原生的方式实现一次上拉加载，下拉刷新，有助于对第三方库有更好的理解与使用 二、实现原理上拉加载及下拉刷新都依">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://static.vue-js.com/df498a00-8ae3-11eb-ab90-d9ae814b240d.png">
+<meta property="article:published_time" content="2019-08-05T11:56:44.000Z">
+<meta property="article:modified_time" content="2023-08-07T06:30:33.792Z">
+<meta property="article:author" content="heliang">
+<meta property="article:tag" content="js_pull_up_loading_pull_down">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://static.vue-js.com/df498a00-8ae3-11eb-ab90-d9ae814b240d.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>如何实现上拉加载，下拉刷新？</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://helife.net">helife</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2019/08/06/js-event-loop/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2019/07/16/js-debounce-throttle/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2019/08/05/js-pull-up-loading-pull-down/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2019/08/05/js-pull-up-loading-pull-down/&text=如何实现上拉加载，下拉刷新？"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2019/08/05/js-pull-up-loading-pull-down/&title=如何实现上拉加载，下拉刷新？"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2019/08/05/js-pull-up-loading-pull-down/&is_video=false&description=如何实现上拉加载，下拉刷新？"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=如何实现上拉加载，下拉刷新？&body=Check out this article: http://example.com/2019/08/05/js-pull-up-loading-pull-down/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2019/08/05/js-pull-up-loading-pull-down/&title=如何实现上拉加载，下拉刷新？"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2019/08/05/js-pull-up-loading-pull-down/&title=如何实现上拉加载，下拉刷新？"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2019/08/05/js-pull-up-loading-pull-down/&title=如何实现上拉加载，下拉刷新？"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2019/08/05/js-pull-up-loading-pull-down/&title=如何实现上拉加载，下拉刷新？"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2019/08/05/js-pull-up-loading-pull-down/&name=如何实现上拉加载，下拉刷新？&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2019/08/05/js-pull-up-loading-pull-down/&t=如何实现上拉加载，下拉刷新？"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E4%B8%8A%E6%8B%89%E5%8A%A0%E8%BD%BD%EF%BC%8C%E4%B8%8B%E6%8B%89%E5%88%B7%E6%96%B0%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">如何实现上拉加载，下拉刷新？</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%89%8D%E8%A8%80"><span class="toc-number">1.1.</span> <span class="toc-text">一、前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86"><span class="toc-number">1.2.</span> <span class="toc-text">二、实现原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8A%E6%8B%89%E5%8A%A0%E8%BD%BD"><span class="toc-number">1.2.1.</span> <span class="toc-text">上拉加载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E6%8B%89%E5%88%B7%E6%96%B0"><span class="toc-number">1.2.2.</span> <span class="toc-text">下拉刷新</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%A1%88%E4%BE%8B"><span class="toc-number">1.3.</span> <span class="toc-text">三、案例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-number">1.3.1.</span> <span class="toc-text">小结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">1.4.</span> <span class="toc-text">参考文献</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        如何实现上拉加载，下拉刷新？
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">heliang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2019-08-05T11:56:44.000Z" itemprop="datePublished">2019-08-05</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/javascript/">javascript</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/js-pull-up-loading-pull-down/" rel="tag">js_pull_up_loading_pull_down</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="如何实现上拉加载，下拉刷新？"><a href="#如何实现上拉加载，下拉刷新？" class="headerlink" title="如何实现上拉加载，下拉刷新？"></a>如何实现上拉加载，下拉刷新？</h1><h2 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h2><p>下拉刷新和上拉加载这两种交互方式通常出现在移动端中</p>
+<p>本质上等同于PC网页中的分页，只是交互形式不同</p>
+<p>开源社区也有很多优秀的解决方案，如<code>iscroll</code>、<code>better-scroll</code>、<code>pulltorefresh.js</code>库等等</p>
+<p>这些第三方库使用起来非常便捷</p>
+<p>我们通过原生的方式实现一次上拉加载，下拉刷新，有助于对第三方库有更好的理解与使用</p>
+<h2 id="二、实现原理"><a href="#二、实现原理" class="headerlink" title="二、实现原理"></a>二、实现原理</h2><p>上拉加载及下拉刷新都依赖于用户交互</p>
+<p>最重要的是要理解在什么场景，什么时机下触发交互动作</p>
+<h3 id="上拉加载"><a href="#上拉加载" class="headerlink" title="上拉加载"></a>上拉加载</h3><p>首先可以看一张图</p>
+<p> <img src="https://static.vue-js.com/df498a00-8ae3-11eb-ab90-d9ae814b240d.png"></p>
+<p>上拉加载的本质是页面触底，或者快要触底时的动作</p>
+<p>判断页面触底我们需要先了解一下下面几个属性</p>
+<ul>
+<li><p><code>scrollTop</code>：滚动视窗的高度距离<code>window</code>顶部的距离，它会随着往上滚动而不断增加，初始值是0，它是一个变化的值</p>
+</li>
+<li><p><code>clientHeight</code>:它是一个定值，表示屏幕可视区域的高度；</p>
+</li>
+<li><p><code>scrollHeight</code>：页面不能滚动时也是存在的,此时scrollHeight等于clientHeight。scrollHeight表示<code>body</code>所有元素的总长度(包括body元素自身的padding)</p>
+</li>
+</ul>
+<p>综上我们得出一个触底公式：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scrollTop + clientHeight &gt;= scrollHeight</span><br></pre></td></tr></table></figure>
+
+<p>简单实现</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> clientHeight  = <span class="variable language_">document</span>.<span class="property">documentElement</span>.<span class="property">clientHeight</span>; <span class="comment">//浏览器高度</span></span><br><span class="line"><span class="keyword">let</span> scrollHeight = <span class="variable language_">document</span>.<span class="property">body</span>.<span class="property">scrollHeight</span>;</span><br><span class="line"><span class="keyword">let</span> scrollTop = <span class="variable language_">document</span>.<span class="property">documentElement</span>.<span class="property">scrollTop</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">let</span> distance = <span class="number">50</span>;  <span class="comment">//距离视窗还用50的时候，开始触发；</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> ((scrollTop + clientHeight) &gt;= (scrollHeight - distance)) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;开始加载数据&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="下拉刷新"><a href="#下拉刷新" class="headerlink" title="下拉刷新"></a>下拉刷新</h3><p>下拉刷新的本质是页面本身置于顶部时，用户下拉时需要触发的动作</p>
+<p>关于下拉刷新的原生实现，主要分成三步：</p>
+<ul>
+<li>监听原生<code>touchstart</code>事件，记录其初始位置的值，<code>e.touches[0].pageY</code>；</li>
+<li>监听原生<code>touchmove</code>事件，记录并计算当前滑动的位置值与初始位置值的差值，大于<code>0</code>表示向下拉动，并借助CSS3的<code>translateY</code>属性使元素跟随手势向下滑动对应的差值，同时也应设置一个允许滑动的最大值；</li>
+<li>监听原生<code>touchend</code>事件，若此时元素滑动达到最大值，则触发<code>callback</code>，同时将<code>translateY</code>重设为<code>0</code>，元素回到初始位置</li>
+</ul>
+<p>举个例子：</p>
+<p><code>Html</code>结构如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;main&gt;</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;refreshText&quot;</span>&gt;</span>&lt;/p &gt;</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;<span class="name">ul</span> <span class="attr">id</span>=<span class="string">&quot;refreshContainer&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>111<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>222<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>333<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>444<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">li</span>&gt;</span>555<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        ...</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">main</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>监听<code>touchstart</code>事件，记录初始的值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> _element = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;refreshContainer&#x27;</span>),</span><br><span class="line">    _refreshText = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.refreshText&#x27;</span>),</span><br><span class="line">    _startPos = <span class="number">0</span>,  <span class="comment">// 初始的值</span></span><br><span class="line">    _transitionHeight = <span class="number">0</span>; <span class="comment">// 移动的距离</span></span><br><span class="line"></span><br><span class="line">_element.<span class="title function_">addEventListener</span>(<span class="string">&#x27;touchstart&#x27;</span>, <span class="keyword">function</span>(<span class="params">e</span>) &#123;</span><br><span class="line">    _startPos = e.<span class="property">touches</span>[<span class="number">0</span>].<span class="property">pageY</span>; <span class="comment">// 记录初始位置</span></span><br><span class="line">    _element.<span class="property">style</span>.<span class="property">position</span> = <span class="string">&#x27;relative&#x27;</span>;</span><br><span class="line">    _element.<span class="property">style</span>.<span class="property">transition</span> = <span class="string">&#x27;transform 0s&#x27;</span>;</span><br><span class="line">&#125;, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+
+<p>监听<code>touchmove</code>移动事件，记录滑动差值</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">_element.<span class="title function_">addEventListener</span>(<span class="string">&#x27;touchmove&#x27;</span>, <span class="keyword">function</span>(<span class="params">e</span>) &#123;</span><br><span class="line">    <span class="comment">// e.touches[0].pageY 当前位置</span></span><br><span class="line">    _transitionHeight = e.<span class="property">touches</span>[<span class="number">0</span>].<span class="property">pageY</span> - _startPos; <span class="comment">// 记录差值</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (_transitionHeight &gt; <span class="number">0</span> &amp;&amp; _transitionHeight &lt; <span class="number">60</span>) &#123; </span><br><span class="line">        _refreshText.<span class="property">innerText</span> = <span class="string">&#x27;下拉刷新&#x27;</span>; </span><br><span class="line">        _element.<span class="property">style</span>.<span class="property">transform</span> = <span class="string">&#x27;translateY(&#x27;</span>+_transitionHeight+<span class="string">&#x27;px)&#x27;</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (_transitionHeight &gt; <span class="number">55</span>) &#123;</span><br><span class="line">            _refreshText.<span class="property">innerText</span> = <span class="string">&#x27;释放更新&#x27;</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;                </span><br><span class="line">&#125;, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+
+<p>最后，就是监听<code>touchend</code>离开的事件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">_element.<span class="title function_">addEventListener</span>(<span class="string">&#x27;touchend&#x27;</span>, <span class="keyword">function</span>(<span class="params">e</span>) &#123;</span><br><span class="line">    _element.<span class="property">style</span>.<span class="property">transition</span> = <span class="string">&#x27;transform 0.5s ease 1s&#x27;</span>;</span><br><span class="line">    _element.<span class="property">style</span>.<span class="property">transform</span> = <span class="string">&#x27;translateY(0px)&#x27;</span>;</span><br><span class="line">    _refreshText.<span class="property">innerText</span> = <span class="string">&#x27;更新中...&#x27;</span>;</span><br><span class="line">    <span class="comment">// todo...</span></span><br><span class="line"></span><br><span class="line">&#125;, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+
+<p>从上面可以看到，在下拉到松手的过程中，经历了三个阶段：</p>
+<ul>
+<li>当前手势滑动位置与初始位置差值大于零时，提示正在进行下拉刷新操作</li>
+<li>下拉到一定值时，显示松手释放后的操作提示</li>
+<li>下拉到达设定最大值松手时，执行回调，提示正在进行更新操作</li>
+</ul>
+<h2 id="三、案例"><a href="#三、案例" class="headerlink" title="三、案例"></a>三、案例</h2><p>在实际开发中，我们更多的是使用第三方库，下面以<code>better-scroll</code>进行举例：</p>
+<p>HTML结构</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=<span class="string">&quot;position-wrapper&quot;</span>&gt;</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;refresh&quot;</span>&gt;</span>下拉刷新&lt;/p &gt;</span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;position-list&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">   <span class="comment">&lt;!--列表内容--&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;more&quot;</span>&gt;</span>查看更多&lt;/p &gt;</span></span><br><span class="line"><span class="language-xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>实例化上拉下拉插件，通过<code>use</code>来注册插件</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">BScroll</span> <span class="keyword">from</span> <span class="string">&quot;@better-scroll/core&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">PullDown</span> <span class="keyword">from</span> <span class="string">&quot;@better-scroll/pull-down&quot;</span>;</span><br><span class="line"><span class="keyword">import</span> <span class="title class_">PullUp</span> <span class="keyword">from</span> <span class="string">&#x27;@better-scroll/pull-up&#x27;</span>;</span><br><span class="line"><span class="title class_">BScroll</span>.<span class="title function_">use</span>(<span class="title class_">PullDown</span>);</span><br><span class="line"><span class="title class_">BScroll</span>.<span class="title function_">use</span>(<span class="title class_">PullUp</span>);</span><br></pre></td></tr></table></figure>
+
+<p>实例化<code>BetterScroll</code>，并传入相关的参数</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> pageNo = <span class="number">1</span>,pageSize = <span class="number">10</span>,dataList = [],isMore = <span class="literal">true</span>;  </span><br><span class="line"><span class="keyword">var</span> scroll= <span class="keyword">new</span> <span class="title class_">BScroll</span>(<span class="string">&quot;#position-wrapper&quot;</span>,&#123;</span><br><span class="line">    <span class="attr">scrollY</span>:<span class="literal">true</span>,<span class="comment">//垂直方向滚动</span></span><br><span class="line">    <span class="attr">click</span>:<span class="literal">true</span>,<span class="comment">//默认会阻止浏览器的原生click事件，如果需要点击，这里要设为true</span></span><br><span class="line">    <span class="attr">pullUpLoad</span>:<span class="literal">true</span>,<span class="comment">//上拉加载更多</span></span><br><span class="line">    <span class="attr">pullDownRefresh</span>:&#123;</span><br><span class="line">        <span class="attr">threshold</span>:<span class="number">50</span>,<span class="comment">//触发pullingDown事件的位置</span></span><br><span class="line">        <span class="attr">stop</span>:<span class="number">0</span><span class="comment">//下拉回弹后停留的位置</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//监听下拉刷新</span></span><br><span class="line">scroll.<span class="title function_">on</span>(<span class="string">&quot;pullingDown&quot;</span>,pullingDownHandler);</span><br><span class="line"><span class="comment">//监测实时滚动</span></span><br><span class="line">scroll.<span class="title function_">on</span>(<span class="string">&quot;scroll&quot;</span>,scrollHandler);</span><br><span class="line"><span class="comment">//上拉加载更多</span></span><br><span class="line">scroll.<span class="title function_">on</span>(<span class="string">&quot;pullingUp&quot;</span>,pullingUpHandler);</span><br><span class="line"></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">pullingDownHandler</span>(<span class="params"></span>)&#123;</span><br><span class="line">    dataList=[];</span><br><span class="line">    pageNo=<span class="number">1</span>;</span><br><span class="line">    isMore=<span class="literal">true</span>;</span><br><span class="line">    $(<span class="string">&quot;.more&quot;</span>).<span class="title function_">text</span>(<span class="string">&quot;查看更多&quot;</span>);</span><br><span class="line">    <span class="keyword">await</span> <span class="title function_">getlist</span>();<span class="comment">//请求数据</span></span><br><span class="line">    scroll.<span class="title function_">finishPullDown</span>();<span class="comment">//每次下拉结束后，需要执行这个操作</span></span><br><span class="line">    scroll.<span class="title function_">refresh</span>();<span class="comment">//当滚动区域的dom结构有变化时，需要执行这个操作</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">pullingUpHandler</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">if</span>(!isMore)&#123;</span><br><span class="line">        $(<span class="string">&quot;.more&quot;</span>).<span class="title function_">text</span>(<span class="string">&quot;没有更多数据了&quot;</span>);</span><br><span class="line">        scroll.<span class="title function_">finishPullUp</span>();<span class="comment">//每次上拉结束后，需要执行这个操作</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    pageNo++;</span><br><span class="line">    <span class="keyword">await</span> <span class="variable language_">this</span>.<span class="title function_">getlist</span>();<span class="comment">//请求数据</span></span><br><span class="line">    scroll.<span class="title function_">finishPullUp</span>();<span class="comment">//每次上拉结束后，需要执行这个操作</span></span><br><span class="line">    scroll.<span class="title function_">refresh</span>();<span class="comment">//当滚动区域的dom结构有变化时，需要执行这个操作    </span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">scrollHandler</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="variable language_">this</span>.<span class="property">y</span>&gt;<span class="number">50</span>) $(<span class="string">&#x27;.refresh&#x27;</span>).<span class="title function_">text</span>(<span class="string">&quot;松手开始加载&quot;</span>);</span><br><span class="line">    <span class="keyword">else</span> $(<span class="string">&#x27;.refresh&#x27;</span>).<span class="title function_">text</span>(<span class="string">&quot;下拉刷新&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getlist</span>(<span class="params"></span>)&#123;</span><br><span class="line">    <span class="comment">//返回的数据</span></span><br><span class="line">    <span class="keyword">let</span> result=....;</span><br><span class="line">    dataList=dataList.<span class="title function_">concat</span>(result);</span><br><span class="line">    <span class="comment">//判断是否已加载完</span></span><br><span class="line">    <span class="keyword">if</span>(result.<span class="property">length</span>&lt;pageSize) isMore=<span class="literal">false</span>;</span><br><span class="line">    <span class="comment">//将dataList渲染到html内容中</span></span><br><span class="line">&#125;    </span><br></pre></td></tr></table></figure>
+
+<p>注意点：</p>
+<p>使用<code>better-scroll </code>实现下拉刷新、上拉加载时要注意以下几点：</p>
+<ul>
+<li><code>wrapper</code>里必须只有一个子元素</li>
+<li>子元素的高度要比<code>wrapper</code>要高</li>
+<li>使用的时候，要确定<code>DOM</code>元素是否已经生成，必须要等到<code>DOM</code>渲染完成后，再<code>new BScroll()</code></li>
+<li>滚动区域的<code>DOM</code>元素结构有变化后，需要执行刷新 <code>refresh() </code></li>
+<li>上拉或者下拉，结束后，需要执行<code>finishPullUp()</code>或者<code>finishPullDown()</code>，否则将不会执行下次操作</li>
+<li><code>better-scroll</code>，默认会阻止浏览器的原生<code>click</code>事件，如果滚动内容区要添加点击事件，需要在实例化属性里设置<code>click:true</code></li>
+</ul>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>下拉刷新、上拉加载原理本身都很简单，真正复杂的是封装过程中，要考虑的兼容性、易用性、性能等诸多细节</p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000014423308">https://segmentfault.com/a/1190000014423308</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/ustbhuangyi/better-scroll">https://github.com/ustbhuangyi/better-scroll</a></li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://helife.net">helife</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0%E4%B8%8A%E6%8B%89%E5%8A%A0%E8%BD%BD%EF%BC%8C%E4%B8%8B%E6%8B%89%E5%88%B7%E6%96%B0%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">如何实现上拉加载，下拉刷新？</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%89%8D%E8%A8%80"><span class="toc-number">1.1.</span> <span class="toc-text">一、前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86"><span class="toc-number">1.2.</span> <span class="toc-text">二、实现原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8A%E6%8B%89%E5%8A%A0%E8%BD%BD"><span class="toc-number">1.2.1.</span> <span class="toc-text">上拉加载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E6%8B%89%E5%88%B7%E6%96%B0"><span class="toc-number">1.2.2.</span> <span class="toc-text">下拉刷新</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%A1%88%E4%BE%8B"><span class="toc-number">1.3.</span> <span class="toc-text">三、案例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-number">1.3.1.</span> <span class="toc-text">小结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">1.4.</span> <span class="toc-text">参考文献</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2019/08/05/js-pull-up-loading-pull-down/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2019/08/05/js-pull-up-loading-pull-down/&text=如何实现上拉加载，下拉刷新？"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2019/08/05/js-pull-up-loading-pull-down/&title=如何实现上拉加载，下拉刷新？"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2019/08/05/js-pull-up-loading-pull-down/&is_video=false&description=如何实现上拉加载，下拉刷新？"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=如何实现上拉加载，下拉刷新？&body=Check out this article: http://example.com/2019/08/05/js-pull-up-loading-pull-down/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2019/08/05/js-pull-up-loading-pull-down/&title=如何实现上拉加载，下拉刷新？"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2019/08/05/js-pull-up-loading-pull-down/&title=如何实现上拉加载，下拉刷新？"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2019/08/05/js-pull-up-loading-pull-down/&title=如何实现上拉加载，下拉刷新？"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2019/08/05/js-pull-up-loading-pull-down/&title=如何实现上拉加载，下拉刷新？"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2019/08/05/js-pull-up-loading-pull-down/&name=如何实现上拉加载，下拉刷新？&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2019/08/05/js-pull-up-loading-pull-down/&t=如何实现上拉加载，下拉刷新？"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2023
+    heliang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://helife.net">helife</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="css中，有哪些方式可以隐藏页面元素？区别?一、前言在平常的样式排版中，我们经常遇到将某个模块隐藏的场景 通过css隐藏元素的方法有很多种，它们看起来实现的效果是一致的 但实际上每一种方法都有一丝轻微的不同，这些不同决定了在一些特定场合下使用哪一种方法 二、实现方式通过css实现隐藏元素方法有如下：  display:none visibility:hidden opacity:0 设置heigh">
+<meta property="og:type" content="article">
+<meta property="og:title" content="css中，有哪些方式可以隐藏页面元素？区别?">
+<meta property="og:url" content="http://example.com/2018/04/06/css-hide-attr/index.html">
+<meta property="og:site_name" content="HeLife">
+<meta property="og:description" content="css中，有哪些方式可以隐藏页面元素？区别?一、前言在平常的样式排版中，我们经常遇到将某个模块隐藏的场景 通过css隐藏元素的方法有很多种，它们看起来实现的效果是一致的 但实际上每一种方法都有一丝轻微的不同，这些不同决定了在一些特定场合下使用哪一种方法 二、实现方式通过css实现隐藏元素方法有如下：  display:none visibility:hidden opacity:0 设置heigh">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-04-06T11:33:22.000Z">
+<meta property="article:modified_time" content="2023-08-07T06:30:32.813Z">
+<meta property="article:author" content="heliang">
+<meta property="article:tag" content="css_hide_attr">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>css中，有哪些方式可以隐藏页面元素？区别?</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://helife.net">helife</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2018/04/08/css-center/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2018/04/04/css-visul-scrolling/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2018/04/06/css-hide-attr/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2018/04/06/css-hide-attr/&text=css中，有哪些方式可以隐藏页面元素？区别?"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2018/04/06/css-hide-attr/&title=css中，有哪些方式可以隐藏页面元素？区别?"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2018/04/06/css-hide-attr/&is_video=false&description=css中，有哪些方式可以隐藏页面元素？区别?"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=css中，有哪些方式可以隐藏页面元素？区别?&body=Check out this article: http://example.com/2018/04/06/css-hide-attr/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2018/04/06/css-hide-attr/&title=css中，有哪些方式可以隐藏页面元素？区别?"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2018/04/06/css-hide-attr/&title=css中，有哪些方式可以隐藏页面元素？区别?"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2018/04/06/css-hide-attr/&title=css中，有哪些方式可以隐藏页面元素？区别?"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2018/04/06/css-hide-attr/&title=css中，有哪些方式可以隐藏页面元素？区别?"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2018/04/06/css-hide-attr/&name=css中，有哪些方式可以隐藏页面元素？区别?&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2018/04/06/css-hide-attr/&t=css中，有哪些方式可以隐藏页面元素？区别?"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#css%E4%B8%AD%EF%BC%8C%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B9%E5%BC%8F%E5%8F%AF%E4%BB%A5%E9%9A%90%E8%97%8F%E9%A1%B5%E9%9D%A2%E5%85%83%E7%B4%A0%EF%BC%9F%E5%8C%BA%E5%88%AB"><span class="toc-number">1.</span> <span class="toc-text">css中，有哪些方式可以隐藏页面元素？区别?</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%89%8D%E8%A8%80"><span class="toc-number">1.1.</span> <span class="toc-text">一、前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="toc-number">1.2.</span> <span class="toc-text">二、实现方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#display-none"><span class="toc-number">1.2.1.</span> <span class="toc-text">display:none</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#visibility-hidden"><span class="toc-number">1.2.2.</span> <span class="toc-text">visibility:hidden</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#opacity-0"><span class="toc-number">1.2.3.</span> <span class="toc-text">opacity:0</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AEheight%E3%80%81width%E5%B1%9E%E6%80%A7%E4%B8%BA0"><span class="toc-number">1.2.4.</span> <span class="toc-text">设置height、width属性为0</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#position-absolute"><span class="toc-number">1.2.5.</span> <span class="toc-text">position:absolute</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#clip-path"><span class="toc-number">1.2.6.</span> <span class="toc-text">clip-path</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-number">1.2.7.</span> <span class="toc-text">小结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%8C%BA%E5%88%AB"><span class="toc-number">1.3.</span> <span class="toc-text">三、区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">1.4.</span> <span class="toc-text">参考文献</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        css中，有哪些方式可以隐藏页面元素？区别?
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">heliang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2018-04-06T11:33:22.000Z" itemprop="datePublished">2018-04-06</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/css/">css</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/css-hide-attr/" rel="tag">css_hide_attr</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="css中，有哪些方式可以隐藏页面元素？区别"><a href="#css中，有哪些方式可以隐藏页面元素？区别" class="headerlink" title="css中，有哪些方式可以隐藏页面元素？区别?"></a>css中，有哪些方式可以隐藏页面元素？区别?</h1><h2 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h2><p>在平常的样式排版中，我们经常遇到将某个模块隐藏的场景</p>
+<p>通过<code>css</code>隐藏元素的方法有很多种，它们看起来实现的效果是一致的</p>
+<p>但实际上每一种方法都有一丝轻微的不同，这些不同决定了在一些特定场合下使用哪一种方法</p>
+<h2 id="二、实现方式"><a href="#二、实现方式" class="headerlink" title="二、实现方式"></a>二、实现方式</h2><p>通过<code>css</code>实现隐藏元素方法有如下：</p>
+<ul>
+<li>display:none</li>
+<li>visibility:hidden</li>
+<li>opacity:0</li>
+<li>设置height、width模型属性为0</li>
+<li>position:absolute</li>
+<li>clip-path</li>
+</ul>
+<h3 id="display-none"><a href="#display-none" class="headerlink" title="display:none"></a>display:none</h3><p>设置元素的<code>display</code>为<code>none</code>是最常用的隐藏元素的方法</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.hide</span> &#123;</span><br><span class="line">    <span class="attribute">display</span>:none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>将元素设置为<code>display:none</code>后，元素在页面上将彻底消失</p>
+<p>元素本身占有的空间就会被其他元素占有，也就是说它会导致浏览器的重排和重绘</p>
+<p>消失后，自身绑定的事件不会触发，也不会有过渡效果</p>
+<p>特点：元素不可见，不占据空间，无法响应点击事件</p>
+<h3 id="visibility-hidden"><a href="#visibility-hidden" class="headerlink" title="visibility:hidden"></a>visibility:hidden</h3><p>设置元素的<code>visibility</code>为<code>hidden</code>也是一种常用的隐藏元素的方法</p>
+<p>从页面上仅仅是隐藏该元素，DOM结果均会存在，只是当时在一个不可见的状态，不会触发重排，但是会触发重绘</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.hidden</span>&#123;</span><br><span class="line">    <span class="attribute">visibility</span>:hidden</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>给人的效果是隐藏了，所以他自身的事件不会触发</p>
+<p>特点：元素不可见，占据页面空间，无法响应点击事件</p>
+<h3 id="opacity-0"><a href="#opacity-0" class="headerlink" title="opacity:0"></a>opacity:0</h3><p><code>opacity</code>属性表示元素的透明度，将元素的透明度设置为0后，在我们用户眼中，元素也是隐藏的</p>
+<p>不会引发重排，一般情况下也会引发重绘</p>
+<blockquote>
+<p>如果利用 animation 动画，对 opacity 做变化（animation会默认触发GPU加速），则只会触发 GPU 层面的 composite，不会触发重绘</p>
+</blockquote>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.transparent</span> &#123;</span><br><span class="line">    <span class="attribute">opacity</span>:<span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>由于其仍然是存在于页面上的，所以他自身的的事件仍然是可以触发的，但被他遮挡的元素是不能触发其事件的</p>
+<p>需要注意的是：其子元素不能设置opacity来达到显示的效果</p>
+<p>特点：改变元素透明度，元素不可见，占据页面空间，可以响应点击事件</p>
+<h3 id="设置height、width属性为0"><a href="#设置height、width属性为0" class="headerlink" title="设置height、width属性为0"></a>设置height、width属性为0</h3><p>将元素的<code>margin</code>，<code>border</code>，<code>padding</code>，<code>height</code>和<code>width</code>等影响元素盒模型的属性设置成0，如果元素内有子元素或内容，还应该设置其<code>overflow:hidden</code>来隐藏其子元素</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.hiddenBox</span> &#123;</span><br><span class="line">    <span class="attribute">margin</span>:<span class="number">0</span>;     </span><br><span class="line">    <span class="attribute">border</span>:<span class="number">0</span>;</span><br><span class="line">    <span class="attribute">padding</span>:<span class="number">0</span>;</span><br><span class="line">    <span class="attribute">height</span>:<span class="number">0</span>;</span><br><span class="line">    <span class="attribute">width</span>:<span class="number">0</span>;</span><br><span class="line">    <span class="attribute">overflow</span>:hidden;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>特点：元素不可见，不占据页面空间，无法响应点击事件</p>
+<h3 id="position-absolute"><a href="#position-absolute" class="headerlink" title="position:absolute"></a>position:absolute</h3><p>将元素移出可视区域</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.hide</span> &#123;</span><br><span class="line">   <span class="attribute">position</span>: absolute;</span><br><span class="line">   <span class="attribute">top</span>: -<span class="number">9999px</span>;</span><br><span class="line">   <span class="attribute">left</span>: -<span class="number">9999px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>特点：元素不可见，不影响页面布局</p>
+<h3 id="clip-path"><a href="#clip-path" class="headerlink" title="clip-path"></a>clip-path</h3><p>通过裁剪的形式</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.hide</span> &#123;</span><br><span class="line">  <span class="attribute">clip-path</span>: <span class="built_in">polygon</span>(<span class="number">0px</span> <span class="number">0px</span>,<span class="number">0px</span> <span class="number">0px</span>,<span class="number">0px</span> <span class="number">0px</span>,<span class="number">0px</span> <span class="number">0px</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>特点：元素不可见，占据页面空间，无法响应点击事件</p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>最常用的还是<code>display:none</code>和<code>visibility:hidden</code>，其他的方式只能认为是奇招，它们的真正用途并不是用于隐藏元素，所以并不推荐使用它们</p>
+<h2 id="三、区别"><a href="#三、区别" class="headerlink" title="三、区别"></a>三、区别</h2><p>关于<code>display: none</code>、<code>  visibility: hidden</code>、<code>opacity: 0</code>的区别，如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">display: none</th>
+<th align="left">visibility: hidden</th>
+<th>opacity: 0</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">页面中</td>
+<td align="left">不存在</td>
+<td align="left">存在</td>
+<td>存在</td>
+</tr>
+<tr>
+<td align="left">重排</td>
+<td align="left">会</td>
+<td align="left">不会</td>
+<td>不会</td>
+</tr>
+<tr>
+<td align="left">重绘</td>
+<td align="left">会</td>
+<td align="left">会</td>
+<td>不一定</td>
+</tr>
+<tr>
+<td align="left">自身绑定事件</td>
+<td align="left">不触发</td>
+<td align="left">不触发</td>
+<td>可触发</td>
+</tr>
+<tr>
+<td align="left">transition</td>
+<td align="left">不支持</td>
+<td align="left">支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td align="left">子元素可复原</td>
+<td align="left">不能</td>
+<td align="left">能</td>
+<td>不能</td>
+</tr>
+<tr>
+<td align="left">被遮挡的元素可触发事件</td>
+<td align="left">能</td>
+<td align="left">能</td>
+<td>不能</td>
+</tr>
+</tbody></table>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/a-cat/p/9039962.html">https://www.cnblogs.com/a-cat/p/9039962.html</a></li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://helife.net">helife</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#css%E4%B8%AD%EF%BC%8C%E6%9C%89%E5%93%AA%E4%BA%9B%E6%96%B9%E5%BC%8F%E5%8F%AF%E4%BB%A5%E9%9A%90%E8%97%8F%E9%A1%B5%E9%9D%A2%E5%85%83%E7%B4%A0%EF%BC%9F%E5%8C%BA%E5%88%AB"><span class="toc-number">1.</span> <span class="toc-text">css中，有哪些方式可以隐藏页面元素？区别?</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%89%8D%E8%A8%80"><span class="toc-number">1.1.</span> <span class="toc-text">一、前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F"><span class="toc-number">1.2.</span> <span class="toc-text">二、实现方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#display-none"><span class="toc-number">1.2.1.</span> <span class="toc-text">display:none</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#visibility-hidden"><span class="toc-number">1.2.2.</span> <span class="toc-text">visibility:hidden</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#opacity-0"><span class="toc-number">1.2.3.</span> <span class="toc-text">opacity:0</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AEheight%E3%80%81width%E5%B1%9E%E6%80%A7%E4%B8%BA0"><span class="toc-number">1.2.4.</span> <span class="toc-text">设置height、width属性为0</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#position-absolute"><span class="toc-number">1.2.5.</span> <span class="toc-text">position:absolute</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#clip-path"><span class="toc-number">1.2.6.</span> <span class="toc-text">clip-path</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E7%BB%93"><span class="toc-number">1.2.7.</span> <span class="toc-text">小结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%8C%BA%E5%88%AB"><span class="toc-number">1.3.</span> <span class="toc-text">三、区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">1.4.</span> <span class="toc-text">参考文献</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2018/04/06/css-hide-attr/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2018/04/06/css-hide-attr/&text=css中，有哪些方式可以隐藏页面元素？区别?"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2018/04/06/css-hide-attr/&title=css中，有哪些方式可以隐藏页面元素？区别?"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2018/04/06/css-hide-attr/&is_video=false&description=css中，有哪些方式可以隐藏页面元素？区别?"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=css中，有哪些方式可以隐藏页面元素？区别?&body=Check out this article: http://example.com/2018/04/06/css-hide-attr/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2018/04/06/css-hide-attr/&title=css中，有哪些方式可以隐藏页面元素？区别?"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2018/04/06/css-hide-attr/&title=css中，有哪些方式可以隐藏页面元素？区别?"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2018/04/06/css-hide-attr/&title=css中，有哪些方式可以隐藏页面元素？区别?"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2018/04/06/css-hide-attr/&title=css中，有哪些方式可以隐藏页面元素？区别?"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2018/04/06/css-hide-attr/&name=css中，有哪些方式可以隐藏页面元素？区别?&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2018/04/06/css-hide-attr/&t=css中，有哪些方式可以隐藏页面元素？区别?"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2023
+    heliang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://helife.net">helife</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

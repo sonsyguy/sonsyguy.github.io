@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="与webpack类似的工具还有哪些？区别？ 一、模块化工具模块化是一种处理复杂系统分解为更好的可管理模块的方式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="与webpack类似的工具还有哪些？区别？">
+<meta property="og:url" content="http://example.com/2023/07/29/webpack-Rollup_Parcel_snowpack_Vite/index.html">
+<meta property="og:site_name" content="HeLife">
+<meta property="og:description" content="与webpack类似的工具还有哪些？区别？ 一、模块化工具模块化是一种处理复杂系统分解为更好的可管理模块的方式">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://static.vue-js.com/8ed8d520-b1a4-11eb-85f6-6fac77c0c9b3.png">
+<meta property="og:image" content="https://static.vue-js.com/8fe07830-b143-11eb-85f6-6fac77c0c9b3.png">
+<meta property="og:image" content="https://static.vue-js.com/ec17e7a0-b1a2-11eb-85f6-6fac77c0c9b3.png">
+<meta property="og:image" content="https://static.vue-js.com/79197830-b1a3-11eb-85f6-6fac77c0c9b3.png">
+<meta property="og:image" content="https://static.vue-js.com/9f2eed30-b143-11eb-85f6-6fac77c0c9b3.png">
+<meta property="article:published_time" content="2023-07-29T12:23:00.000Z">
+<meta property="article:modified_time" content="2023-08-07T06:30:34.664Z">
+<meta property="article:author" content="heliang">
+<meta property="article:tag" content="webpack类似的工具">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://static.vue-js.com/8ed8d520-b1a4-11eb-85f6-6fac77c0c9b3.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>与webpack类似的工具还有哪些？区别？</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://helife.net">helife</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2023/07/27/webpack-proxy/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2023/07/29/webpack-Rollup_Parcel_snowpack_Vite/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2023/07/29/webpack-Rollup_Parcel_snowpack_Vite/&text=与webpack类似的工具还有哪些？区别？"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2023/07/29/webpack-Rollup_Parcel_snowpack_Vite/&title=与webpack类似的工具还有哪些？区别？"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2023/07/29/webpack-Rollup_Parcel_snowpack_Vite/&is_video=false&description=与webpack类似的工具还有哪些？区别？"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=与webpack类似的工具还有哪些？区别？&body=Check out this article: http://example.com/2023/07/29/webpack-Rollup_Parcel_snowpack_Vite/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2023/07/29/webpack-Rollup_Parcel_snowpack_Vite/&title=与webpack类似的工具还有哪些？区别？"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2023/07/29/webpack-Rollup_Parcel_snowpack_Vite/&title=与webpack类似的工具还有哪些？区别？"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2023/07/29/webpack-Rollup_Parcel_snowpack_Vite/&title=与webpack类似的工具还有哪些？区别？"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2023/07/29/webpack-Rollup_Parcel_snowpack_Vite/&title=与webpack类似的工具还有哪些？区别？"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2023/07/29/webpack-Rollup_Parcel_snowpack_Vite/&name=与webpack类似的工具还有哪些？区别？&description=&lt;h1 id=&#34;与webpack类似的工具还有哪些？区别？&#34;&gt;&lt;a href=&#34;#与webpack类似的工具还有哪些？区别？&#34; class=&#34;headerlink&#34; title=&#34;与webpack类似的工具还有哪些？区别？&#34;&gt;&lt;/a&gt;与webpack类似的工具还有哪些？区别？&lt;/h1&gt;&lt;p&gt;&lt;img src=&#34;https://static.vue-js.com/8ed8d520-b1a4-11eb-85f6-6fac77c0c9b3.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;一、模块化工具&#34;&gt;&lt;a href=&#34;#一、模块化工具&#34; class=&#34;headerlink&#34; title=&#34;一、模块化工具&#34;&gt;&lt;/a&gt;一、模块化工具&lt;/h2&gt;&lt;p&gt;模块化是一种处理复杂系统分解为更好的可管理模块的方式&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2023/07/29/webpack-Rollup_Parcel_snowpack_Vite/&t=与webpack类似的工具还有哪些？区别？"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%8Ewebpack%E7%B1%BB%E4%BC%BC%E7%9A%84%E5%B7%A5%E5%85%B7%E8%BF%98%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">与webpack类似的工具还有哪些？区别？</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%A8%A1%E5%9D%97%E5%8C%96%E5%B7%A5%E5%85%B7"><span class="toc-number">1.1.</span> <span class="toc-text">一、模块化工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Rollup"><span class="toc-number">1.1.1.</span> <span class="toc-text">Rollup</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Parcel"><span class="toc-number">1.1.2.</span> <span class="toc-text">Parcel</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Snowpack"><span class="toc-number">1.1.3.</span> <span class="toc-text">Snowpack</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Vite"><span class="toc-number">1.1.4.</span> <span class="toc-text">Vite</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#webpack"><span class="toc-number">1.1.5.</span> <span class="toc-text">webpack</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">1.2.</span> <span class="toc-text">参考文献</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        与webpack类似的工具还有哪些？区别？
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">heliang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-07-29T12:23:00.000Z" itemprop="datePublished">2023-07-29</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/webpack/">webpack</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/webpack%E7%B1%BB%E4%BC%BC%E7%9A%84%E5%B7%A5%E5%85%B7/" rel="tag">webpack类似的工具</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="与webpack类似的工具还有哪些？区别？"><a href="#与webpack类似的工具还有哪些？区别？" class="headerlink" title="与webpack类似的工具还有哪些？区别？"></a>与webpack类似的工具还有哪些？区别？</h1><p><img src="https://static.vue-js.com/8ed8d520-b1a4-11eb-85f6-6fac77c0c9b3.png"></p>
+<h2 id="一、模块化工具"><a href="#一、模块化工具" class="headerlink" title="一、模块化工具"></a>一、模块化工具</h2><p>模块化是一种处理复杂系统分解为更好的可管理模块的方式</p>
+<span id="more"></span>
+<p>可以用来分割，组织和打包应用。每个模块完成一个特定的子功能，所有的模块按某种方法组装起来，成为一个整体(<code>bundle</code>)</p>
+<p>在前端领域中，并非只有<code>webpack</code>这一款优秀的模块打包工具，还有其他类似的工具，例如<code>Rollup</code>、<code>Parcel</code>、<code>snowpack</code>，以及最近风头无两的<code>Vite</code></p>
+<p>通过这些模块打包工具，能够提高我们的开发效率，减少开发成本</p>
+<p>这里没有提及<code>gulp</code>、<code>grunt</code>是因为它们只是定义为构建工具，不能类比</p>
+<h3 id="Rollup"><a href="#Rollup" class="headerlink" title="Rollup"></a>Rollup</h3><p><code>Rollup</code> 是一款 <code>ES Modules</code> 打包器，从作用上来看，<code>Rollup</code> 与 <code>Webpack</code> 非常类似。不过相比于 <code>Webpack</code>，<code>Rollup </code>要小巧的多</p>
+<p>现在很多我们熟知的库都都使用它进行打包，比如：<code>Vue</code>、<code>React</code>和<code>three.js</code>等</p>
+<p>举个例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ./src/messages.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">  <span class="attr">hi</span>: <span class="string">&#x27;Hey Guys, I am zce~&#x27;</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ./src/logger.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title function_">log</span> = msg =&gt; &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;---------- INFO ----------&#x27;</span>)</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(msg)</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;--------------------------&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title function_">error</span> = msg =&gt; &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&#x27;---------- ERROR ----------&#x27;</span>)</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">error</span>(msg)</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&#x27;---------------------------&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ./src/index.js</span></span><br><span class="line"><span class="keyword">import</span> &#123; log &#125; <span class="keyword">from</span> <span class="string">&#x27;./logger&#x27;</span></span><br><span class="line"><span class="keyword">import</span> messages <span class="keyword">from</span> <span class="string">&#x27;./messages&#x27;</span></span><br><span class="line"><span class="title function_">log</span>(messages.<span class="property">hi</span>)</span><br></pre></td></tr></table></figure>
+
+<p>然后通过<code>rollup</code>进行打包</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npx rollup ./src/index.<span class="property">js</span> --file ./dist/bundle.<span class="property">js</span></span><br></pre></td></tr></table></figure>
+
+<p>打包结果如下图<img src="https://static.vue-js.com/8fe07830-b143-11eb-85f6-6fac77c0c9b3.png"></p>
+<p>可以看到，代码非常简洁，完成不像<code>webpack</code>那样存在大量引导代码和模块函数</p>
+<p>并且<code>error</code>方法由于没有被使用，输出的结果中并无<code>error</code>方法，可以看到，<code>rollup</code>默认开始<code>Tree-shaking</code> 优化输出结果</p>
+<p>因此，可以看到<code>Rollup</code>的优点：</p>
+<ul>
+<li>代码效率更简洁、效率更高</li>
+<li>默认支持 Tree-shaking</li>
+</ul>
+<p>但缺点也十分明显，加载其他类型的资源文件或者支持导入 <code>CommonJS</code> 模块，又或是编译 <code>ES</code> 新特性，这些额外的需求 <code>Rollup </code>需要使用插件去完成</p>
+<p>综合来看，<code>rollup</code>并不适合开发应用使用，因为需要使用第三方模块，而目前第三方模块大多数使用<code>CommonJs</code>方式导出成员，并且<code>rollup</code>不支持<code>HMR</code>，使开发效率降低</p>
+<p>但是在用于打包<code> JavaScript</code> 库时，<code>rollup</code>比 <code>webpack</code> 更有优势，因为其打包出来的代码更小、更快，其存在的缺点可以忽略</p>
+<h3 id="Parcel"><a href="#Parcel" class="headerlink" title="Parcel"></a>Parcel</h3><p>Parcel ，是一款完全零配置的前端打包器，它提供了 “傻瓜式” 的使用体验，只需了解简单的命令，就能构建前端应用程序</p>
+<p><code>Parcel</code> 跟 <code>Webpack</code> 一样都支持以任意类型文件作为打包入口，但建议使用<code>HTML</code>文件作为入口，该<code>HTML</code>文件像平时一样正常编写代码、引用资源。如下所示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- ./src/index.<span class="property">html</span> --&gt;</span><br><span class="line">&lt;!<span class="variable constant_">DOCTYPE</span> html&gt;</span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Parcel Tutorials<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span></span><br><span class="line"><span class="language-xml">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;main.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span></span><br><span class="line"><span class="language-xml"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<p>main.js文件通过<code>ES Moudle</code>方法导入其他模块成员</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ./src/main.js</span></span><br><span class="line"><span class="keyword">import</span> &#123; log &#125; <span class="keyword">from</span> <span class="string">&#x27;./logger&#x27;</span></span><br><span class="line"><span class="title function_">log</span>(<span class="string">&#x27;hello parcel&#x27;</span>)</span><br><span class="line"><span class="comment">// ./src/logger.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title function_">log</span> = msg =&gt; &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;---------- INFO ----------&#x27;</span>)</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(msg)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>运行之后，使用命令打包</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx parcel src/index.html</span><br></pre></td></tr></table></figure>
+
+<p>执行命令后，<code>Parcel</code>不仅打包了应用，同时也启动了一个开发服务器，跟<code>webpack Dev Server</code>一样</p>
+<p>跟<code>webpack</code>类似，也支持模块热替换，但用法更简单</p>
+<p>同时，<code>Parcel</code>有个十分好用的功能：支持自动安装依赖，像<code>webpack</code>开发阶段突然使用安装某个第三方依赖，必然会终止<code>dev server</code>然后安装再启动。而<code>Parcel</code>则免了这繁琐的工作流程</p>
+<p>同时，<code>Parcel</code>能够零配置加载其他类型的资源文件，无须像<code>webpack</code>那样配置对应的<code>loader</code></p>
+<p>打包命令如下：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npx parcel src/index.html</span><br></pre></td></tr></table></figure>
+
+<p>由于打包过程是多进程同时工作，构建速度会比<code>Webpack</code> 快，输出文件也会被压缩，并且样式代码也会被单独提取到单个文件中</p>
+<p><img src="https://static.vue-js.com/ec17e7a0-b1a2-11eb-85f6-6fac77c0c9b3.png"></p>
+<p>可以感受到，<code>Parcel </code>给开发者一种很大的自由度，只管去实现业务代码，其他事情用<code>Parcel</code>解决</p>
+<h3 id="Snowpack"><a href="#Snowpack" class="headerlink" title="Snowpack"></a>Snowpack</h3><p>Snowpack，是一种闪电般快速的前端构建工具，专为现代<code>Web</code>设计，较复杂的打包工具（如<code>Webpack</code>或<code>Parcel</code>）的替代方案，利用<code>JavaScript</code>的本机模块系统，避免不必要的工作并保持流畅的开发体验</p>
+<p>开发阶段，每次保存单个文件时，<code>Webpack</code>和<code>Parcel</code>都需要重新构建和重新打包应用程序的整个<code>bundle</code>。而<code>Snowpack</code>为你的应用程序每个文件构建一次，就可以永久缓存，文件更改时，<code>Snowpack</code>会重新构建该单个文件</p>
+<p>下图给出<code>webpack</code>与<code>snowpack</code>打包区别：</p>
+<p> <img src="https://static.vue-js.com/79197830-b1a3-11eb-85f6-6fac77c0c9b3.png"></p>
+<p>在重新构建每次变更时没有任何的时间浪费，只需要在浏览器中进行HMR更新</p>
+<h3 id="Vite"><a href="#Vite" class="headerlink" title="Vite"></a>Vite</h3><p>vite ，是一种新型前端构建工具，能够显著提升前端开发体验</p>
+<p>它主要由两部分组成：</p>
+<ul>
+<li>一个开发服务器，它基于 原生 ES 模块 提供了丰富的内建功能，如速度快到惊人的 [模块热更新HMR</li>
+<li>一套构建指令，它使用 Rollup打包你的代码，并且它是预配置的，可以输出用于生产环境的优化过的静态资源</li>
+</ul>
+<p>其作用类似<code>webpack </code>+ <code>webpack-dev-server</code>，其特点如下：</p>
+<ul>
+<li>快速的冷启动</li>
+<li>即时的模块热更新</li>
+<li>真正的按需编译</li>
+</ul>
+<p><code>vite</code>会直接启动开发服务器，不需要进行打包操作，也就意味着不需要分析模块的依赖、不需要编译，因此启动速度非常快</p>
+<p>利用现代浏览器支持<code>ES Module</code>的特性，当浏览器请求某个模块的时候，再根据需要对模块的内容进行编译，这种方式大大缩短了编译时间</p>
+<p>原理图如下所示：</p>
+<p> <img src="https://static.vue-js.com/9f2eed30-b143-11eb-85f6-6fac77c0c9b3.png"></p>
+<p>在热模块<code>HMR</code>方面，当修改一个模块的时候，仅需让浏览器重新请求该模块即可，无须像<code>webpack</code>那样需要把该模块的相关依赖模块全部编译一次，效率更高</p>
+<h3 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h3><p>相比上述的模块化工具，<code>webpack</code>大而全，很多常用的功能做到开箱即用。有两大最核心的特点：<strong>一切皆模块</strong>和<strong>按需加载</strong></p>
+<p>与其他构建工具相比，有如下优势：</p>
+<ul>
+<li>智能解析：对 CommonJS 、 AMD 、ES6 的语法做了兼容</li>
+<li>万物模块：对 js、css、图片等资源文件都支持打包</li>
+<li>开箱即用：HRM、Tree-shaking等功能</li>
+<li>代码分割：可以将代码切割成不同的 chunk，实现按需加载，降低了初始化时间</li>
+<li>插件系统，具有强大的 Plugin 接口，具有更好的灵活性和扩展性</li>
+<li>易于调试：支持 SourceUrls 和 SourceMaps</li>
+<li>快速运行：webpack 使用异步 IO 并具有多级缓存，这使得 webpack 很快且在增量编译上更加快</li>
+<li>生态环境好：社区更丰富，出现的问题更容易解决</li>
+</ul>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/95684686">https://zhuanlan.zhihu.com/p/95684686</a></li>
+<li><a target="_blank" rel="noopener" href="https://cn.vitejs.dev/guide/">https://cn.vitejs.dev/guide/</a></li>
+<li><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000039370642">https://segmentfault.com/a/1190000039370642</a></li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://helife.net">helife</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%8Ewebpack%E7%B1%BB%E4%BC%BC%E7%9A%84%E5%B7%A5%E5%85%B7%E8%BF%98%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">与webpack类似的工具还有哪些？区别？</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%A8%A1%E5%9D%97%E5%8C%96%E5%B7%A5%E5%85%B7"><span class="toc-number">1.1.</span> <span class="toc-text">一、模块化工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Rollup"><span class="toc-number">1.1.1.</span> <span class="toc-text">Rollup</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Parcel"><span class="toc-number">1.1.2.</span> <span class="toc-text">Parcel</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Snowpack"><span class="toc-number">1.1.3.</span> <span class="toc-text">Snowpack</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Vite"><span class="toc-number">1.1.4.</span> <span class="toc-text">Vite</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#webpack"><span class="toc-number">1.1.5.</span> <span class="toc-text">webpack</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">1.2.</span> <span class="toc-text">参考文献</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2023/07/29/webpack-Rollup_Parcel_snowpack_Vite/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2023/07/29/webpack-Rollup_Parcel_snowpack_Vite/&text=与webpack类似的工具还有哪些？区别？"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2023/07/29/webpack-Rollup_Parcel_snowpack_Vite/&title=与webpack类似的工具还有哪些？区别？"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2023/07/29/webpack-Rollup_Parcel_snowpack_Vite/&is_video=false&description=与webpack类似的工具还有哪些？区别？"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=与webpack类似的工具还有哪些？区别？&body=Check out this article: http://example.com/2023/07/29/webpack-Rollup_Parcel_snowpack_Vite/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2023/07/29/webpack-Rollup_Parcel_snowpack_Vite/&title=与webpack类似的工具还有哪些？区别？"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2023/07/29/webpack-Rollup_Parcel_snowpack_Vite/&title=与webpack类似的工具还有哪些？区别？"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2023/07/29/webpack-Rollup_Parcel_snowpack_Vite/&title=与webpack类似的工具还有哪些？区别？"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2023/07/29/webpack-Rollup_Parcel_snowpack_Vite/&title=与webpack类似的工具还有哪些？区别？"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2023/07/29/webpack-Rollup_Parcel_snowpack_Vite/&name=与webpack类似的工具还有哪些？区别？&description=&lt;h1 id=&#34;与webpack类似的工具还有哪些？区别？&#34;&gt;&lt;a href=&#34;#与webpack类似的工具还有哪些？区别？&#34; class=&#34;headerlink&#34; title=&#34;与webpack类似的工具还有哪些？区别？&#34;&gt;&lt;/a&gt;与webpack类似的工具还有哪些？区别？&lt;/h1&gt;&lt;p&gt;&lt;img src=&#34;https://static.vue-js.com/8ed8d520-b1a4-11eb-85f6-6fac77c0c9b3.png&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;一、模块化工具&#34;&gt;&lt;a href=&#34;#一、模块化工具&#34; class=&#34;headerlink&#34; title=&#34;一、模块化工具&#34;&gt;&lt;/a&gt;一、模块化工具&lt;/h2&gt;&lt;p&gt;模块化是一种处理复杂系统分解为更好的可管理模块的方式&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2023/07/29/webpack-Rollup_Parcel_snowpack_Vite/&t=与webpack类似的工具还有哪些？区别？"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2023
+    heliang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://helife.net">helife</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

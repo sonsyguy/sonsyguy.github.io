@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Git常用的命令有哪些？一、前言git 的操作可以通过命令的形式如执行，日常使用就如下图6个命令即可   实际上，如果想要熟练使用，超过60多个命令需要了解，下面则介绍下常见的的git 命令 二、有哪些配置Git 自带一个 git config 的工具来帮助设置控制 Git 外观和行为的配置变量，在我们安装完git之后，第一件事就是设置你的用户名和邮件地址 后续每一个提交都会使用这些信息，它们会写">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git常用的命令有哪些？">
+<meta property="og:url" content="http://example.com/2017/01/06/git-command/index.html">
+<meta property="og:site_name" content="HeLife">
+<meta property="og:description" content="Git常用的命令有哪些？一、前言git 的操作可以通过命令的形式如执行，日常使用就如下图6个命令即可   实际上，如果想要熟练使用，超过60多个命令需要了解，下面则介绍下常见的的git 命令 二、有哪些配置Git 自带一个 git config 的工具来帮助设置控制 Git 外观和行为的配置变量，在我们安装完git之后，第一件事就是设置你的用户名和邮件地址 后续每一个提交都会使用这些信息，它们会写">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://static.vue-js.com/fe150520-f7af-11eb-991d-334fd31f0201.png">
+<meta property="og:image" content="https://static.vue-js.com/0a10f3c0-f7b0-11eb-991d-334fd31f0201.png">
+<meta property="article:published_time" content="2017-01-06T09:05:02.000Z">
+<meta property="article:modified_time" content="2023-08-07T06:30:33.132Z">
+<meta property="article:author" content="heliang">
+<meta property="article:tag" content="git_command">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://static.vue-js.com/fe150520-f7af-11eb-991d-334fd31f0201.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Git常用的命令有哪些？</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://helife.net">helife</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2017/01/16/git-fork-clone-branch/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2017/01/02/git-conflict/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2017/01/06/git-command/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2017/01/06/git-command/&text=Git常用的命令有哪些？"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2017/01/06/git-command/&title=Git常用的命令有哪些？"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2017/01/06/git-command/&is_video=false&description=Git常用的命令有哪些？"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Git常用的命令有哪些？&body=Check out this article: http://example.com/2017/01/06/git-command/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2017/01/06/git-command/&title=Git常用的命令有哪些？"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2017/01/06/git-command/&title=Git常用的命令有哪些？"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2017/01/06/git-command/&title=Git常用的命令有哪些？"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2017/01/06/git-command/&title=Git常用的命令有哪些？"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2017/01/06/git-command/&name=Git常用的命令有哪些？&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2017/01/06/git-command/&t=Git常用的命令有哪些？"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Git%E5%B8%B8%E7%94%A8%E7%9A%84%E5%91%BD%E4%BB%A4%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">Git常用的命令有哪些？</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%89%8D%E8%A8%80"><span class="toc-number">1.1.</span> <span class="toc-text">一、前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="toc-number">1.2.</span> <span class="toc-text">二、有哪些</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE"><span class="toc-number">1.3.</span> <span class="toc-text">配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8"><span class="toc-number">1.3.1.</span> <span class="toc-text">启动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A5%E5%B8%B8%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="toc-number">1.3.2.</span> <span class="toc-text">日常基本操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E6%94%AF%E6%93%8D%E4%BD%9C"><span class="toc-number">1.3.3.</span> <span class="toc-text">分支操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9C%E7%A8%8B%E5%90%8C%E6%AD%A5"><span class="toc-number">1.3.4.</span> <span class="toc-text">远程同步</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%92%A4%E9%94%80"><span class="toc-number">1.3.5.</span> <span class="toc-text">撤销</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E6%93%8D%E4%BD%9C"><span class="toc-number">1.3.6.</span> <span class="toc-text">存储操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%80%BB%E7%BB%93"><span class="toc-number">1.4.</span> <span class="toc-text">三、总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">1.5.</span> <span class="toc-text">参考文献</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Git常用的命令有哪些？
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">heliang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2017-01-06T09:05:02.000Z" itemprop="datePublished">2017-01-06</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/git/">git</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/git-command/" rel="tag">git_command</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="Git常用的命令有哪些？"><a href="#Git常用的命令有哪些？" class="headerlink" title="Git常用的命令有哪些？"></a>Git常用的命令有哪些？</h1><h2 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h2><p><code>git </code>的操作可以通过命令的形式如执行，日常使用就如下图6个命令即可</p>
+<p> <img src="https://static.vue-js.com/fe150520-f7af-11eb-991d-334fd31f0201.png"></p>
+<p>实际上，如果想要熟练使用，超过60多个命令需要了解，下面则介绍下常见的的<code>git </code>命令</p>
+<h2 id="二、有哪些"><a href="#二、有哪些" class="headerlink" title="二、有哪些"></a>二、有哪些</h2><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p><code>Git </code>自带一个 <code>git config</code> 的工具来帮助设置控制 <code>Git </code>外观和行为的配置变量，在我们安装完<code>git</code>之后，第一件事就是设置你的用户名和邮件地址</p>
+<p>后续每一个提交都会使用这些信息，它们会写入到你的每一次提交中，不可更改</p>
+<p>设置提交代码时的用户信息命令如下：</p>
+<ul>
+<li>git config [–global] user.name “[name]” </li>
+<li>git config [–global] user.email “[email address]”</li>
+</ul>
+<h3 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h3><p>一个<code>git</code>项目的初始有两个途径，分别是：</p>
+<ul>
+<li>git init [project-name]：创建或在当前目录初始化一个git代码库</li>
+<li>git clone url：下载一个项目和它的整个代码历史</li>
+</ul>
+<h3 id="日常基本操作"><a href="#日常基本操作" class="headerlink" title="日常基本操作"></a>日常基本操作</h3><p>在日常工作中，代码常用的基本操作如下：</p>
+<ul>
+<li>git init 初始化仓库，默认为 master 分支</li>
+<li>git add . 提交全部文件修改到缓存区</li>
+<li>git add &lt;具体某个文件路径+全名&gt; 提交某些文件到缓存区</li>
+<li>git diff  查看当前代码 add后，会 add 哪些内容</li>
+<li>git diff –staged查看现在 commit 提交后，会提交哪些内容</li>
+<li>git status 查看当前分支状态</li>
+<li>git pull &lt;远程仓库名&gt; &lt;远程分支名&gt; 拉取远程仓库的分支与本地当前分支合并</li>
+<li>git pull &lt;远程仓库名&gt; &lt;远程分支名&gt;:&lt;本地分支名&gt; 拉取远程仓库的分支与本地某个分支合并</li>
+<li>git commit -m “&lt;注释&gt;” 提交代码到本地仓库，并写提交注释</li>
+<li>git commit -v 提交时显示所有diff信息</li>
+<li>git commit –amend [file1] [file2] 重做上一次commit，并包括指定文件的新变化</li>
+</ul>
+<p>关于提交信息的格式，可以遵循以下的规则：</p>
+<ul>
+<li>feat: 新特性，添加功能</li>
+<li>fix: 修改 bug</li>
+<li>refactor: 代码重构</li>
+<li>docs: 文档修改</li>
+<li>style: 代码格式修改, 注意不是 css 修改</li>
+<li>test: 测试用例修改</li>
+<li>chore: 其他修改, 比如构建流程, 依赖管理</li>
+</ul>
+<h3 id="分支操作"><a href="#分支操作" class="headerlink" title="分支操作"></a>分支操作</h3><ul>
+<li>git branch 查看本地所有分支</li>
+<li>git branch -r 查看远程所有分支</li>
+<li>git branch -a 查看本地和远程所有分支</li>
+<li>git merge &lt;分支名&gt; 合并分支</li>
+<li>git merge –abort 合并分支出现冲突时，取消合并，一切回到合并前的状态</li>
+<li>git branch &lt;新分支名&gt; 基于当前分支，新建一个分支</li>
+<li>git checkout –orphan &lt;新分支名&gt; 新建一个空分支（会保留之前分支的所有文件）</li>
+<li>git branch -D &lt;分支名&gt; 删除本地某个分支</li>
+<li>git push &lt;远程库名&gt; :&lt;分支名&gt; 删除远程某个分支</li>
+<li>git branch &lt;新分支名称&gt; &lt;提交ID&gt; 从提交历史恢复某个删掉的某个分支</li>
+<li>git branch -m &lt;原分支名&gt; &lt;新分支名&gt; 分支更名</li>
+<li>git checkout &lt;分支名&gt; 切换到本地某个分支</li>
+<li>git checkout &lt;远程库名&gt;&#x2F;&lt;分支名&gt; 切换到线上某个分支</li>
+<li>git checkout -b &lt;新分支名&gt; 把基于当前分支新建分支，并切换为这个分支</li>
+</ul>
+<h3 id="远程同步"><a href="#远程同步" class="headerlink" title="远程同步"></a>远程同步</h3><p>远程操作常见的命令：</p>
+<ul>
+<li>git fetch [remote] 下载远程仓库的所有变动</li>
+<li>git remote -v 显示所有远程仓库</li>
+<li>git pull [remote] [branch] 拉取远程仓库的分支与本地当前分支合并</li>
+<li>git fetch 获取线上最新版信息记录，不合并</li>
+<li>git push [remote] [branch] 上传本地指定分支到远程仓库</li>
+<li>git push [remote] –force 强行推送当前分支到远程仓库，即使有冲突</li>
+<li>git push [remote] –all 推送所有分支到远程仓库</li>
+</ul>
+<h3 id="撤销"><a href="#撤销" class="headerlink" title="撤销"></a>撤销</h3><ul>
+<li><p>git checkout [file] 恢复暂存区的指定文件到工作区</p>
+</li>
+<li><p>git checkout [commit] [file]  恢复某个commit的指定文件到暂存区和工作区</p>
+</li>
+<li><p>git checkout . 恢复暂存区的所有文件到工作区</p>
+</li>
+<li><p>git reset [commit] 重置当前分支的指针为指定commit，同时重置暂存区，但工作区不变</p>
+</li>
+<li><p>git reset –hard 重置暂存区与工作区，与上一次commit保持一致</p>
+</li>
+<li><p>git reset [file] 重置暂存区的指定文件，与上一次commit保持一致，但工作区不变</p>
+</li>
+<li><p>git revert [commit]  后者的所有变化都将被前者抵消，并且应用到当前分支</p>
+</li>
+</ul>
+<blockquote>
+<p><code>reset</code>：真实硬性回滚，目标版本后面的提交记录全部丢失了</p>
+<p><code>revert</code>：同样回滚，这个回滚操作相当于一个提价，目标版本后面的提交记录也全部都有</p>
+</blockquote>
+<h3 id="存储操作"><a href="#存储操作" class="headerlink" title="存储操作"></a>存储操作</h3><p>你正在进行项目中某一部分的工作，里面的东西处于一个比较杂乱的状态，而你想转到其他分支上进行一些工作，但又不想提交这些杂乱的代码，这时候可以将代码进行存储</p>
+<ul>
+<li><p>git stash 暂时将未提交的变化移除</p>
+</li>
+<li><p>git stash pop 取出储藏中最后存入的工作状态进行恢复，会删除储藏</p>
+</li>
+<li><p>git stash list 查看所有储藏中的工作</p>
+</li>
+<li><p>git stash apply &lt;储藏的名称&gt;  取出储藏中对应的工作状态进行恢复，不会删除储藏</p>
+</li>
+<li><p>git stash clear 清空所有储藏中的工作</p>
+</li>
+<li><p>git stash drop &lt;储藏的名称&gt;  删除对应的某个储藏</p>
+</li>
+</ul>
+<h2 id="三、总结"><a href="#三、总结" class="headerlink" title="三、总结"></a>三、总结</h2><p><code>git</code>常用命令速查表如下所示：</p>
+<p> <img src="https://static.vue-js.com/0a10f3c0-f7b0-11eb-991d-334fd31f0201.png"></p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><p><a target="_blank" rel="noopener" href="https://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html">https://www.ruanyifeng.com/blog/2015/12/git-cheat-sheet.html</a></p>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000017875714">https://segmentfault.com/a/1190000017875714</a></p>
+</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://helife.net">helife</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Git%E5%B8%B8%E7%94%A8%E7%9A%84%E5%91%BD%E4%BB%A4%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">Git常用的命令有哪些？</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%89%8D%E8%A8%80"><span class="toc-number">1.1.</span> <span class="toc-text">一、前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="toc-number">1.2.</span> <span class="toc-text">二、有哪些</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE"><span class="toc-number">1.3.</span> <span class="toc-text">配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8"><span class="toc-number">1.3.1.</span> <span class="toc-text">启动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A5%E5%B8%B8%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="toc-number">1.3.2.</span> <span class="toc-text">日常基本操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E6%94%AF%E6%93%8D%E4%BD%9C"><span class="toc-number">1.3.3.</span> <span class="toc-text">分支操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9C%E7%A8%8B%E5%90%8C%E6%AD%A5"><span class="toc-number">1.3.4.</span> <span class="toc-text">远程同步</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%92%A4%E9%94%80"><span class="toc-number">1.3.5.</span> <span class="toc-text">撤销</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E6%93%8D%E4%BD%9C"><span class="toc-number">1.3.6.</span> <span class="toc-text">存储操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%80%BB%E7%BB%93"><span class="toc-number">1.4.</span> <span class="toc-text">三、总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">1.5.</span> <span class="toc-text">参考文献</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2017/01/06/git-command/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2017/01/06/git-command/&text=Git常用的命令有哪些？"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2017/01/06/git-command/&title=Git常用的命令有哪些？"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2017/01/06/git-command/&is_video=false&description=Git常用的命令有哪些？"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Git常用的命令有哪些？&body=Check out this article: http://example.com/2017/01/06/git-command/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2017/01/06/git-command/&title=Git常用的命令有哪些？"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2017/01/06/git-command/&title=Git常用的命令有哪些？"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2017/01/06/git-command/&title=Git常用的命令有哪些？"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2017/01/06/git-command/&title=Git常用的命令有哪些？"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2017/01/06/git-command/&name=Git常用的命令有哪些？&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2017/01/06/git-command/&t=Git常用的命令有哪些？"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2023
+    heliang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://helife.net">helife</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

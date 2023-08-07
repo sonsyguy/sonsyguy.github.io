@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="css选择器有哪些？优先级？哪些属性可以继承？一、选择器CSS选择器是CSS规则的第一部分 它是元素和其他部分组合起来告诉浏览器哪个HTML元素应当是被选为应用规则中的CSS属性值的方式 选择器所选择的元素，叫做“选择器的对象” 我们从一个Html结构开始 1234567891011&lt;div id&#x3D;&quot;box&quot;&gt;    &lt;div class&#x3D;&quot;one&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="css选择器有哪些？优先级？哪些属性可以继承？">
+<meta property="og:url" content="http://example.com/2018/11/06/css-selector/index.html">
+<meta property="og:site_name" content="HeLife">
+<meta property="og:description" content="css选择器有哪些？优先级？哪些属性可以继承？一、选择器CSS选择器是CSS规则的第一部分 它是元素和其他部分组合起来告诉浏览器哪个HTML元素应当是被选为应用规则中的CSS属性值的方式 选择器所选择的元素，叫做“选择器的对象” 我们从一个Html结构开始 1234567891011&lt;div id&#x3D;&quot;box&quot;&gt;    &lt;div class&#x3D;&quot;one&amp;">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-11-06T11:38:48.000Z">
+<meta property="article:modified_time" content="2023-08-07T06:30:32.878Z">
+<meta property="article:author" content="heliang">
+<meta property="article:tag" content="css_selector">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>css选择器有哪些？优先级？哪些属性可以继承？</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://helife.net">helife</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2018/11/26/css-single-multi-line/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2018/11/06/css-flexbox/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2018/11/06/css-selector/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2018/11/06/css-selector/&text=css选择器有哪些？优先级？哪些属性可以继承？"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2018/11/06/css-selector/&title=css选择器有哪些？优先级？哪些属性可以继承？"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2018/11/06/css-selector/&is_video=false&description=css选择器有哪些？优先级？哪些属性可以继承？"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=css选择器有哪些？优先级？哪些属性可以继承？&body=Check out this article: http://example.com/2018/11/06/css-selector/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2018/11/06/css-selector/&title=css选择器有哪些？优先级？哪些属性可以继承？"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2018/11/06/css-selector/&title=css选择器有哪些？优先级？哪些属性可以继承？"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2018/11/06/css-selector/&title=css选择器有哪些？优先级？哪些属性可以继承？"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2018/11/06/css-selector/&title=css选择器有哪些？优先级？哪些属性可以继承？"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2018/11/06/css-selector/&name=css选择器有哪些？优先级？哪些属性可以继承？&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2018/11/06/css-selector/&t=css选择器有哪些？优先级？哪些属性可以继承？"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#css%E9%80%89%E6%8B%A9%E5%99%A8%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F%E4%BC%98%E5%85%88%E7%BA%A7%EF%BC%9F%E5%93%AA%E4%BA%9B%E5%B1%9E%E6%80%A7%E5%8F%AF%E4%BB%A5%E7%BB%A7%E6%89%BF%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">css选择器有哪些？优先级？哪些属性可以继承？</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E9%80%89%E6%8B%A9%E5%99%A8"><span class="toc-number">1.1.</span> <span class="toc-text">一、选择器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E4%BC%98%E5%85%88%E7%BA%A7"><span class="toc-number">1.2.</span> <span class="toc-text">二、优先级</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E7%BB%A7%E6%89%BF%E5%B1%9E%E6%80%A7"><span class="toc-number">1.3.</span> <span class="toc-text">三、继承属性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E7%BB%A7%E6%89%BF%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="toc-number">1.3.1.</span> <span class="toc-text">无继承的属性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">1.4.</span> <span class="toc-text">参考文献</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        css选择器有哪些？优先级？哪些属性可以继承？
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">heliang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2018-11-06T11:38:48.000Z" itemprop="datePublished">2018-11-06</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/css/">css</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/css-selector/" rel="tag">css_selector</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="css选择器有哪些？优先级？哪些属性可以继承？"><a href="#css选择器有哪些？优先级？哪些属性可以继承？" class="headerlink" title="css选择器有哪些？优先级？哪些属性可以继承？"></a>css选择器有哪些？优先级？哪些属性可以继承？</h1><h2 id="一、选择器"><a href="#一、选择器" class="headerlink" title="一、选择器"></a>一、选择器</h2><p>CSS选择器是CSS规则的第一部分</p>
+<p>它是元素和其他部分组合起来告诉浏览器哪个HTML元素应当是被选为应用规则中的CSS属性值的方式</p>
+<p>选择器所选择的元素，叫做“选择器的对象”</p>
+<p>我们从一个<code>Html</code>结构开始</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;box&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;one&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;one_1&quot;</span>&gt;</span></span><br><span class="line">        &lt;/p &gt;</span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">&quot;one_1&quot;</span>&gt;</span></span><br><span class="line">        &lt;/p &gt;</span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;two&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;two&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;two&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>关于<code>css</code>属性选择器常用的有：</p>
+<ul>
+<li><p>id选择器（#box），选择id为box的元素</p>
+</li>
+<li><p>类选择器（.one），选择类名为one的所有元素</p>
+</li>
+<li><p>标签选择器（div），选择标签为div的所有元素</p>
+</li>
+<li><p>后代选择器（#box div），选择id为box元素内部所有的div元素</p>
+</li>
+<li><p>子选择器（.one&gt;one_1），选择父元素为.one的所有.one_1的元素</p>
+</li>
+<li><p>相邻同胞选择器（.one+.two），选择紧接在.one之后的所有.two元素</p>
+</li>
+<li><p>群组选择器（div,p），选择div、p的所有元素</p>
+</li>
+</ul>
+<p>还有一些使用频率相对没那么多的选择器：</p>
+<ul>
+<li>伪类选择器</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-pseudo">:link</span> ：选择未被访问的链接</span><br><span class="line"><span class="selector-pseudo">:visited</span>：选取已被访问的链接</span><br><span class="line"><span class="selector-pseudo">:active</span>：选择活动链接</span><br><span class="line"><span class="selector-pseudo">:hover</span> ：鼠标指针浮动在上面的元素</span><br><span class="line"><span class="selector-pseudo">:focus</span> ：选择具有焦点的</span><br><span class="line"><span class="selector-pseudo">:first</span>-child：父元素的首个子元素</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>伪元素选择器</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-pseudo">:first</span>-letter ：用于选取指定选择器的首字母</span><br><span class="line"><span class="selector-pseudo">:first</span>-line ：选取指定选择器的首行</span><br><span class="line"><span class="selector-pseudo">:before</span> : 选择器在被选元素的内容前面插入内容</span><br><span class="line">:after : 选择器在被选元素的内容后面插入内容</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>属性选择器</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-attr">[attribute]</span> 选择带有attribute属性的元素</span><br><span class="line"><span class="selector-attr">[attribute=value]</span> 选择所有使用attribute=value的元素</span><br><span class="line"><span class="selector-attr">[attribute~=value]</span> 选择attribute属性包含value的元素</span><br><span class="line"><span class="selector-attr">[attribute|=value]</span>：选择attribute属性以value开头的元素</span><br></pre></td></tr></table></figure>
+
+<p>在<code>CSS3</code>中新增的选择器有如下：</p>
+<ul>
+<li>层次选择器（p~ul），选择前面有p元素的每个ul元素</li>
+<li>伪类选择器</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-pseudo">:first</span>-of-type 表示一组同级元素中其类型的第一个元素</span><br><span class="line"><span class="selector-pseudo">:last-of-type</span> 表示一组同级元素中其类型的最后一个元素</span><br><span class="line"><span class="selector-pseudo">:only-of-type</span> 表示没有同类型兄弟元素的元素</span><br><span class="line"><span class="selector-pseudo">:only-child</span> 表示没有任何兄弟的元素</span><br><span class="line"><span class="selector-pseudo">:nth-child</span>(n) 根据元素在一组同级中的位置匹配元素</span><br><span class="line"><span class="selector-pseudo">:nth-last-of-type</span>(n) 匹配给定类型的元素，基于它们在一组兄弟元素中的位置，从末尾开始计数</span><br><span class="line"><span class="selector-pseudo">:last-child</span> 表示一组兄弟元素中的最后一个元素</span><br><span class="line"><span class="selector-pseudo">:root</span> 设置<span class="selector-tag">HTML</span>文档</span><br><span class="line"><span class="selector-pseudo">:empty</span> 指定空的元素</span><br><span class="line"><span class="selector-pseudo">:enabled</span> 选择可用元素</span><br><span class="line"><span class="selector-pseudo">:disabled</span> 选择被禁用元素</span><br><span class="line"><span class="selector-pseudo">:checked</span> 选择选中的元素</span><br><span class="line"><span class="selector-pseudo">:not</span>(selector) 选择与 &lt;selector&gt; 不匹配的所有元素</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>属性选择器</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-attr">[attribute*=value]</span>：选择attribute属性值包含value的所有元素</span><br><span class="line"><span class="selector-attr">[attribute^=value]</span>：选择attribute属性开头为value的所有元素</span><br><span class="line"><span class="selector-attr">[attribute$=value]</span>：选择attribute属性结尾为value的所有元素</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="二、优先级"><a href="#二、优先级" class="headerlink" title="二、优先级"></a>二、优先级</h2><p>相信大家对<code>CSS</code>选择器的优先级都不陌生：</p>
+<blockquote>
+<p>内联 &gt; ID选择器 &gt; 类选择器 &gt; 标签选择器</p>
+</blockquote>
+<p>到具体的计算层⾯，优先级是由 A 、B、C、D 的值来决定的，其中它们的值计算规则如下：</p>
+<ul>
+<li><p>如果存在内联样式，那么 A &#x3D; 1, 否则 A &#x3D; 0</p>
+</li>
+<li><p>B的值等于 ID选择器出现的次数</p>
+</li>
+<li><p>C的值等于 类选择器 和 属性选择器 和 伪类 出现的总次数</p>
+</li>
+<li><p>D 的值等于 标签选择器 和 伪元素 出现的总次数</p>
+</li>
+</ul>
+<p>这里举个例子：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#nav-global</span> &gt; <span class="selector-tag">ul</span> &gt; <span class="selector-tag">li</span> &gt; <span class="selector-tag">a</span><span class="selector-class">.nav-link</span></span><br></pre></td></tr></table></figure>
+
+<p>套用上面的算法，依次求出 <code>A</code> <code>B</code> <code>C</code> <code>D</code> 的值：</p>
+<ul>
+<li><p>因为没有内联样式 ，所以 A &#x3D; 0</p>
+</li>
+<li><p>ID选择器总共出现了1次， B &#x3D; 1</p>
+</li>
+<li><p>类选择器出现了1次， 属性选择器出现了0次，伪类选择器出现0次，所以 C &#x3D; (1 + 0 + 0) &#x3D; 1</p>
+</li>
+<li><p>标签选择器出现了3次， 伪元素出现了0次，所以 D &#x3D; (3 + 0) &#x3D; 3</p>
+</li>
+</ul>
+<p>上面算出的<code>A</code> 、 <code>B</code>、<code>C</code>、<code>D</code> 可以简记作：<code>(0, 1, 1, 3)</code></p>
+<p>知道了优先级是如何计算之后，就来看看比较规则：</p>
+<ul>
+<li>从左往右依次进行比较 ，较大者优先级更高</li>
+<li>如果相等，则继续往右移动一位进行比较</li>
+<li>如果4位全部相等，则后面的会覆盖前面的</li>
+</ul>
+<p>经过上面的优先级计算规则，我们知道内联样式的优先级最高，如果外部样式需要覆盖内联样式，就需要使用<code>!important</code></p>
+<h2 id="三、继承属性"><a href="#三、继承属性" class="headerlink" title="三、继承属性"></a>三、继承属性</h2><p>在<code>css</code>中，继承是指的是给父元素设置一些属性，后代元素会自动拥有这些属性</p>
+<p>关于继承属性，可以分成：</p>
+<ul>
+<li>字体系列属性</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">font</span>:组合字体</span><br><span class="line">font-family:规定元素的字体系列</span><br><span class="line">font-weight:设置字体的粗细</span><br><span class="line">font-size:设置字体的尺寸</span><br><span class="line">font-style:定义字体的风格</span><br><span class="line">font-variant:偏大或偏小的字体</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>文本系列属性</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">text-indent</span>：文本缩进</span><br><span class="line"><span class="attribute">text-align</span>：文本水平对刘</span><br><span class="line"><span class="attribute">line-height</span>：行高</span><br><span class="line"><span class="attribute">word-spacing</span>：增加或减少单词间的空白</span><br><span class="line"><span class="attribute">letter-spacing</span>：增加或减少字符间的空白</span><br><span class="line"><span class="attribute">text-transform</span>：控制文本大小写</span><br><span class="line"><span class="attribute">direction</span>：规定文本的书写方向</span><br><span class="line"><span class="attribute">color</span>：文本颜色</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>元素可见性</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">visibility</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>表格布局属性</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">caption-side</span>：定位表格标题位置</span><br><span class="line"><span class="attribute">border-collapse</span>：合并表格边框</span><br><span class="line"><span class="attribute">border-spacing</span>：设置相邻单元格的边框间的距离</span><br><span class="line"><span class="attribute">empty-cells</span>：单元格的边框的出现与消失</span><br><span class="line"><span class="attribute">table-layout</span>：表格的宽度由什么决定</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>列表属性</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">list-style-type</span>：文字前面的小点点样式</span><br><span class="line"><span class="attribute">list-style-position</span>：小点点位置</span><br><span class="line"><span class="attribute">list-style</span>：以上的属性可通过这属性集合</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>引用</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">quotes</span>：设置嵌套引用的引号类型</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>光标属性</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">cursor</span>：箭头可以变成需要的形状</span><br></pre></td></tr></table></figure>
+
+<p>继承中比较特殊的几点：</p>
+<ul>
+<li><p>a 标签的字体颜色不能被继承</p>
+</li>
+<li><p>h1-h6标签字体的大下也是不能被继承的</p>
+</li>
+</ul>
+<h3 id="无继承的属性"><a href="#无继承的属性" class="headerlink" title="无继承的属性"></a>无继承的属性</h3><ul>
+<li><p>display</p>
+</li>
+<li><p>文本属性：vertical-align、text-decoration</p>
+</li>
+<li><p>盒子模型的属性：宽度、高度、内外边距、边框等</p>
+</li>
+<li><p>背景属性：背景图片、颜色、位置等</p>
+</li>
+<li><p>定位属性：浮动、清除浮动、定位position等</p>
+</li>
+<li><p>生成内容属性：content、counter-reset、counter-increment</p>
+</li>
+<li><p>轮廓样式属性：outline-style、outline-width、outline-color、outline</p>
+</li>
+<li><p>页面样式属性：size、page-break-before、page-break-after</p>
+</li>
+</ul>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://www.html.cn/qa/css3/13444.html">https://www.html.cn/qa/css3/13444.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/Selectors">https://developer.mozilla.org/zh-CN/docs/Learn/CSS/Building_blocks/Selectors</a></li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://helife.net">helife</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#css%E9%80%89%E6%8B%A9%E5%99%A8%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F%E4%BC%98%E5%85%88%E7%BA%A7%EF%BC%9F%E5%93%AA%E4%BA%9B%E5%B1%9E%E6%80%A7%E5%8F%AF%E4%BB%A5%E7%BB%A7%E6%89%BF%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">css选择器有哪些？优先级？哪些属性可以继承？</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E9%80%89%E6%8B%A9%E5%99%A8"><span class="toc-number">1.1.</span> <span class="toc-text">一、选择器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E4%BC%98%E5%85%88%E7%BA%A7"><span class="toc-number">1.2.</span> <span class="toc-text">二、优先级</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E7%BB%A7%E6%89%BF%E5%B1%9E%E6%80%A7"><span class="toc-number">1.3.</span> <span class="toc-text">三、继承属性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A0%E7%BB%A7%E6%89%BF%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="toc-number">1.3.1.</span> <span class="toc-text">无继承的属性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">1.4.</span> <span class="toc-text">参考文献</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2018/11/06/css-selector/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2018/11/06/css-selector/&text=css选择器有哪些？优先级？哪些属性可以继承？"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2018/11/06/css-selector/&title=css选择器有哪些？优先级？哪些属性可以继承？"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2018/11/06/css-selector/&is_video=false&description=css选择器有哪些？优先级？哪些属性可以继承？"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=css选择器有哪些？优先级？哪些属性可以继承？&body=Check out this article: http://example.com/2018/11/06/css-selector/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2018/11/06/css-selector/&title=css选择器有哪些？优先级？哪些属性可以继承？"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2018/11/06/css-selector/&title=css选择器有哪些？优先级？哪些属性可以继承？"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2018/11/06/css-selector/&title=css选择器有哪些？优先级？哪些属性可以继承？"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2018/11/06/css-selector/&title=css选择器有哪些？优先级？哪些属性可以继承？"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2018/11/06/css-selector/&name=css选择器有哪些？优先级？哪些属性可以继承？&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2018/11/06/css-selector/&t=css选择器有哪些？优先级？哪些属性可以继承？"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2023
+    heliang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://helife.net">helife</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
