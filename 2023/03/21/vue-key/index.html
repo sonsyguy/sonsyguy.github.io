@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="你知道vue中key的原理吗？说说你对它的理解 一、Key是什么开始之前，我们先还原两个实际工作场景  当我们在使用v-for时，需要给单元加上key  123&lt;ul&gt;    &lt;li v-for&#x3D;&quot;item in items&quot; :key&#x3D;&quot;item.id&quot;&gt;...&lt;&#x2F;li&gt;&lt;&#x2F;ul&gt;  用+new Date()">
+<meta property="og:type" content="article">
+<meta property="og:title" content="你知道vue中key的原理吗？说说你对它的理解">
+<meta property="og:url" content="http://example.com/2023/03/21/vue-key/index.html">
+<meta property="og:site_name" content="HeLife">
+<meta property="og:description" content="你知道vue中key的原理吗？说说你对它的理解 一、Key是什么开始之前，我们先还原两个实际工作场景  当我们在使用v-for时，需要给单元加上key  123&lt;ul&gt;    &lt;li v-for&#x3D;&quot;item in items&quot; :key&#x3D;&quot;item.id&quot;&gt;...&lt;&#x2F;li&gt;&lt;&#x2F;ul&gt;  用+new Date()">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://static.vue-js.com/bc6e9540-3f41-11eb-85f6-6fac77c0c9b3.png">
+<meta property="og:image" content="https://static.vue-js.com/c9da6790-3f41-11eb-85f6-6fac77c0c9b3.png">
+<meta property="article:published_time" content="2023-03-21T10:40:14.000Z">
+<meta property="article:modified_time" content="2023-08-07T13:46:34.546Z">
+<meta property="article:author" content="heliang">
+<meta property="article:tag" content="vue-key">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://static.vue-js.com/bc6e9540-3f41-11eb-85f6-6fac77c0c9b3.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>你知道vue中key的原理吗？说说你对它的理解</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://helife.net">helife</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2023/05/16/vue-ssr/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2023/03/16/vue-structure/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2023/03/21/vue-key/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2023/03/21/vue-key/&text=你知道vue中key的原理吗？说说你对它的理解"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2023/03/21/vue-key/&title=你知道vue中key的原理吗？说说你对它的理解"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2023/03/21/vue-key/&is_video=false&description=你知道vue中key的原理吗？说说你对它的理解"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=你知道vue中key的原理吗？说说你对它的理解&body=Check out this article: http://example.com/2023/03/21/vue-key/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2023/03/21/vue-key/&title=你知道vue中key的原理吗？说说你对它的理解"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2023/03/21/vue-key/&title=你知道vue中key的原理吗？说说你对它的理解"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2023/03/21/vue-key/&title=你知道vue中key的原理吗？说说你对它的理解"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2023/03/21/vue-key/&title=你知道vue中key的原理吗？说说你对它的理解"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2023/03/21/vue-key/&name=你知道vue中key的原理吗？说说你对它的理解&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2023/03/21/vue-key/&t=你知道vue中key的原理吗？说说你对它的理解"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%A0%E7%9F%A5%E9%81%93vue%E4%B8%ADkey%E7%9A%84%E5%8E%9F%E7%90%86%E5%90%97%EF%BC%9F%E8%AF%B4%E8%AF%B4%E4%BD%A0%E5%AF%B9%E5%AE%83%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-number">1.</span> <span class="toc-text">你知道vue中key的原理吗？说说你对它的理解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81Key%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">1.1.</span> <span class="toc-text">一、Key是什么</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF%E8%83%8C%E5%90%8E%E7%9A%84%E9%80%BB%E8%BE%91"><span class="toc-number">1.1.1.</span> <span class="toc-text">场景背后的逻辑</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E8%AE%BE%E7%BD%AEkey%E4%B8%8E%E4%B8%8D%E8%AE%BE%E7%BD%AEkey%E5%8C%BA%E5%88%AB"><span class="toc-number">1.2.</span> <span class="toc-text">二、设置key与不设置key区别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AEkey%E5%80%BC%E4%B8%80%E5%AE%9A%E8%83%BD%E6%8F%90%E9%AB%98diff%E6%95%88%E7%8E%87%E5%90%97%EF%BC%9F"><span class="toc-number">1.2.1.</span> <span class="toc-text">设置key值一定能提高diff效率吗？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90"><span class="toc-number">1.3.</span> <span class="toc-text">三、原理分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">1.4.</span> <span class="toc-text">参考文献</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        你知道vue中key的原理吗？说说你对它的理解
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">heliang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2023-03-21T10:40:14.000Z" itemprop="datePublished">2023-03-21</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/vue/">vue</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/vue-key/" rel="tag">vue-key</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="你知道vue中key的原理吗？说说你对它的理解"><a href="#你知道vue中key的原理吗？说说你对它的理解" class="headerlink" title="你知道vue中key的原理吗？说说你对它的理解"></a>你知道vue中key的原理吗？说说你对它的理解</h1><p><img src="https://static.vue-js.com/bc6e9540-3f41-11eb-85f6-6fac77c0c9b3.png"></p>
+<h2 id="一、Key是什么"><a href="#一、Key是什么" class="headerlink" title="一、Key是什么"></a>一、Key是什么</h2><p>开始之前，我们先还原两个实际工作场景</p>
+<ol>
+<li>当我们在使用<code>v-for</code>时，需要给单元加上<code>key</code></li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line">    <span class="language-xml"><span class="tag">&lt;<span class="name">li</span> <span class="attr">v-for</span>=<span class="string">&quot;item in items&quot;</span> <span class="attr">:key</span>=<span class="string">&quot;item.id&quot;</span>&gt;</span>...<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span></span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>用<code>+new Date()</code>生成的时间戳作为<code>key</code>，手动强制触发重新渲染<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="title class_">Comp</span> :key=<span class="string">&quot;+new Date()&quot;</span> /&gt;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<p>那么这背后的逻辑是什么，<code>key</code>的作用又是什么？</p>
+<p>一句话来讲</p>
+<blockquote>
+<p>key是给每一个vnode的唯一id，也是diff的一种优化策略，可以根据key，更准确， 更快的找到对应的vnode节点</p>
+</blockquote>
+<h3 id="场景背后的逻辑"><a href="#场景背后的逻辑" class="headerlink" title="场景背后的逻辑"></a>场景背后的逻辑</h3><p>当我们在使用<code>v-for</code>时，需要给单元加上<code>key</code></p>
+<ul>
+<li><p>如果不用key，Vue会采用就地复地原则：最小化element的移动，并且会尝试尽最大程度在同适当的地方对相同类型的element，做patch或者reuse。</p>
+</li>
+<li><p>如果使用了key，Vue会根据keys的顺序记录element，曾经拥有了key的element如果不再出现的话，会被直接remove或者destoryed</p>
+</li>
+</ul>
+<p>用<code>+new Date()</code>生成的时间戳作为<code>key</code>，手动强制触发重新渲染</p>
+<ul>
+<li>当拥有新值的rerender作为key时，拥有了新key的Comp出现了，那么旧key Comp会被移除，新key Comp触发渲染</li>
+</ul>
+<h2 id="二、设置key与不设置key区别"><a href="#二、设置key与不设置key区别" class="headerlink" title="二、设置key与不设置key区别"></a>二、设置key与不设置key区别</h2><p>举个例子：</p>
+<p>创建一个实例，2秒后往<code>items</code>数组插入数据</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;demo&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span> <span class="attr">v-for</span>=<span class="string">&quot;item in items&quot;</span> <span class="attr">:key</span>=<span class="string">&quot;item&quot;</span>&gt;</span>&#123;&#123;item&#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;../../dist/vue.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="comment">// 创建实例</span></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">const</span> app = <span class="keyword">new</span> <span class="title class_">Vue</span>(&#123;</span></span><br><span class="line"><span class="language-javascript">      <span class="attr">el</span>: <span class="string">&#x27;#demo&#x27;</span>,</span></span><br><span class="line"><span class="language-javascript">      <span class="attr">data</span>: &#123; <span class="attr">items</span>: [<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>, <span class="string">&#x27;c&#x27;</span>, <span class="string">&#x27;d&#x27;</span>, <span class="string">&#x27;e&#x27;</span>] &#125;,</span></span><br><span class="line"><span class="language-javascript">      mounted () &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123; </span></span><br><span class="line"><span class="language-javascript">          <span class="variable language_">this</span>.<span class="property">items</span>.<span class="title function_">splice</span>(<span class="number">2</span>, <span class="number">0</span>, <span class="string">&#x27;f&#x27;</span>)  <span class="comment">// </span></span></span><br><span class="line"><span class="language-javascript">       &#125;, <span class="number">2000</span>);</span></span><br><span class="line"><span class="language-javascript">     &#125;,</span></span><br><span class="line"><span class="language-javascript">   &#125;);</span></span><br><span class="line"><span class="language-javascript">  </span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在不使用<code>key</code>的情况，<code>vue</code>会进行这样的操作：</p>
+<p> <img src="https://static.vue-js.com/c9da6790-3f41-11eb-85f6-6fac77c0c9b3.png"></p>
+<p>分析下整体流程：</p>
+<ul>
+<li>比较A，A，相同类型的节点，进行<code>patch</code>，但数据相同，不发生<code>dom</code>操作</li>
+<li>比较B，B，相同类型的节点，进行<code>patch</code>，但数据相同，不发生<code>dom</code>操作</li>
+<li>比较C，F，相同类型的节点，进行<code>patch</code>，数据不同，发生<code>dom</code>操作</li>
+<li>比较D，C，相同类型的节点，进行<code>patch</code>，数据不同，发生<code>dom</code>操作</li>
+<li>比较E，D，相同类型的节点，进行<code>patch</code>，数据不同，发生<code>dom</code>操作</li>
+<li>循环结束，将E插入到<code>DOM</code>中</li>
+</ul>
+<p>一共发生了3次更新，1次插入操作</p>
+<p>在使用<code>key</code>的情况：<code>vue</code>会进行这样的操作：</p>
+<ul>
+<li>比较A，A，相同类型的节点，进行<code>patch</code>，但数据相同，不发生<code>dom</code>操作</li>
+<li>比较B，B，相同类型的节点，进行<code>patch</code>，但数据相同，不发生<code>dom</code>操作</li>
+<li>比较C，F，不相同类型的节点<ul>
+<li>比较E、E，相同类型的节点，进行<code>patch</code>，但数据相同，不发生<code>dom</code>操作</li>
+</ul>
+</li>
+<li>比较D、D，相同类型的节点，进行<code>patch</code>，但数据相同，不发生<code>dom</code>操作</li>
+<li>比较C、C，相同类型的节点，进行<code>patch</code>，但数据相同，不发生<code>dom</code>操作</li>
+<li>循环结束，将F插入到C之前</li>
+</ul>
+<p>一共发生了0次更新，1次插入操作</p>
+<p>通过上面两个小例子，可见设置<code>key</code>能够大大减少对页面的<code>DOM</code>操作，提高了<code>diff</code>效率</p>
+<h3 id="设置key值一定能提高diff效率吗？"><a href="#设置key值一定能提高diff效率吗？" class="headerlink" title="设置key值一定能提高diff效率吗？"></a>设置key值一定能提高diff效率吗？</h3><p>其实不然，文档中也明确表示</p>
+<blockquote>
+<p>当 Vue.js 用 v-for 正在更新已渲染过的元素列表时，它默认用“就地复用”策略。如果数据项的顺序被改变，Vue 将不会移动 DOM 元素来匹配数据项的顺序， 而是简单复用此处每个元素，并且确保它在特定索引下显示已被渲染过的每个元素</p>
+</blockquote>
+<p>这个默认的模式是高效的，但是只适用于不依赖子组件状态或临时 DOM 状态 (例如：表单输入值) 的列表渲染输出</p>
+<p>建议尽可能在使用 <code>v-for</code> 时提供 <code>key</code>，除非遍历输出的 DOM 内容非常简单，或者是刻意依赖默认行为以获取性能上的提升</p>
+<h2 id="三、原理分析"><a href="#三、原理分析" class="headerlink" title="三、原理分析"></a>三、原理分析</h2><p>源码位置：core&#x2F;vdom&#x2F;patch.js</p>
+<p>这里判断是否为同一个<code>key</code>，首先判断的是<code>key</code>值是否相等如果没有设置<code>key</code>，那么<code>key</code>为<code>undefined</code>，这时候<code>undefined</code>是恒等于<code>undefined</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">sameVnode</span> (a, b) &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">        a.<span class="property">key</span> === b.<span class="property">key</span> &amp;&amp; (</span><br><span class="line">            (</span><br><span class="line">                a.<span class="property">tag</span> === b.<span class="property">tag</span> &amp;&amp;</span><br><span class="line">                a.<span class="property">isComment</span> === b.<span class="property">isComment</span> &amp;&amp;</span><br><span class="line">                <span class="title function_">isDef</span>(a.<span class="property">data</span>) === <span class="title function_">isDef</span>(b.<span class="property">data</span>) &amp;&amp;</span><br><span class="line">                <span class="title function_">sameInputType</span>(a, b)</span><br><span class="line">            ) || (</span><br><span class="line">                <span class="title function_">isTrue</span>(a.<span class="property">isAsyncPlaceholder</span>) &amp;&amp;</span><br><span class="line">                a.<span class="property">asyncFactory</span> === b.<span class="property">asyncFactory</span> &amp;&amp;</span><br><span class="line">                <span class="title function_">isUndef</span>(b.<span class="property">asyncFactory</span>.<span class="property">error</span>)</span><br><span class="line">            )</span><br><span class="line">        )</span><br><span class="line">    )</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>updateChildren</code>方法中会对新旧<code>vnode</code>进行<code>diff</code>，然后将比对出的结果用来更新真实的<code>DOM</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">updateChildren</span> (parentElm, oldCh, newCh, insertedVnodeQueue, removeOnly) &#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="keyword">while</span> (oldStartIdx &lt;= oldEndIdx &amp;&amp; newStartIdx &lt;= newEndIdx) &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="title function_">isUndef</span>(oldStartVnode)) &#123;</span><br><span class="line">            ...</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="title function_">isUndef</span>(oldEndVnode)) &#123;</span><br><span class="line">            ...</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="title function_">sameVnode</span>(oldStartVnode, newStartVnode)) &#123;</span><br><span class="line">            ...</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="title function_">sameVnode</span>(oldEndVnode, newEndVnode)) &#123;</span><br><span class="line">            ...</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="title function_">sameVnode</span>(oldStartVnode, newEndVnode)) &#123; <span class="comment">// Vnode moved right</span></span><br><span class="line">            ...</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="title function_">sameVnode</span>(oldEndVnode, newStartVnode)) &#123; <span class="comment">// Vnode moved left</span></span><br><span class="line">            ...</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="title function_">isUndef</span>(oldKeyToIdx)) oldKeyToIdx = <span class="title function_">createKeyToOldIdx</span>(oldCh, oldStartIdx, oldEndIdx)</span><br><span class="line">            idxInOld = <span class="title function_">isDef</span>(newStartVnode.<span class="property">key</span>)</span><br><span class="line">                ? oldKeyToIdx[newStartVnode.<span class="property">key</span>]</span><br><span class="line">                : <span class="title function_">findIdxInOld</span>(newStartVnode, oldCh, oldStartIdx, oldEndIdx)</span><br><span class="line">            <span class="keyword">if</span> (<span class="title function_">isUndef</span>(idxInOld)) &#123; <span class="comment">// New element</span></span><br><span class="line">                <span class="title function_">createElm</span>(newStartVnode, insertedVnodeQueue, parentElm, oldStartVnode.<span class="property">elm</span>, <span class="literal">false</span>, newCh, newStartIdx)</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                vnodeToMove = oldCh[idxInOld]</span><br><span class="line">                <span class="keyword">if</span> (<span class="title function_">sameVnode</span>(vnodeToMove, newStartVnode)) &#123;</span><br><span class="line">                    <span class="title function_">patchVnode</span>(vnodeToMove, newStartVnode, insertedVnodeQueue, newCh, newStartIdx)</span><br><span class="line">                    oldCh[idxInOld] = <span class="literal">undefined</span></span><br><span class="line">                    canMove &amp;&amp; nodeOps.<span class="title function_">insertBefore</span>(parentElm, vnodeToMove.<span class="property">elm</span>, oldStartVnode.<span class="property">elm</span>)</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    <span class="comment">// same key but different element. treat as new element</span></span><br><span class="line">                    <span class="title function_">createElm</span>(newStartVnode, insertedVnodeQueue, parentElm, oldStartVnode.<span class="property">elm</span>, <span class="literal">false</span>, newCh, newStartIdx)</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            newStartVnode = newCh[++newStartIdx]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903826693029895">https://juejin.cn/post/6844903826693029895</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903985397104648">https://juejin.cn/post/6844903985397104648</a></li>
+<li><a target="_blank" rel="noopener" href="https://vue3js.cn/docs/zh">https://vue3js.cn/docs/zh</a></li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://helife.net">helife</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%A0%E7%9F%A5%E9%81%93vue%E4%B8%ADkey%E7%9A%84%E5%8E%9F%E7%90%86%E5%90%97%EF%BC%9F%E8%AF%B4%E8%AF%B4%E4%BD%A0%E5%AF%B9%E5%AE%83%E7%9A%84%E7%90%86%E8%A7%A3"><span class="toc-number">1.</span> <span class="toc-text">你知道vue中key的原理吗？说说你对它的理解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81Key%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">1.1.</span> <span class="toc-text">一、Key是什么</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF%E8%83%8C%E5%90%8E%E7%9A%84%E9%80%BB%E8%BE%91"><span class="toc-number">1.1.1.</span> <span class="toc-text">场景背后的逻辑</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E8%AE%BE%E7%BD%AEkey%E4%B8%8E%E4%B8%8D%E8%AE%BE%E7%BD%AEkey%E5%8C%BA%E5%88%AB"><span class="toc-number">1.2.</span> <span class="toc-text">二、设置key与不设置key区别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AEkey%E5%80%BC%E4%B8%80%E5%AE%9A%E8%83%BD%E6%8F%90%E9%AB%98diff%E6%95%88%E7%8E%87%E5%90%97%EF%BC%9F"><span class="toc-number">1.2.1.</span> <span class="toc-text">设置key值一定能提高diff效率吗？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%8E%9F%E7%90%86%E5%88%86%E6%9E%90"><span class="toc-number">1.3.</span> <span class="toc-text">三、原理分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">1.4.</span> <span class="toc-text">参考文献</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2023/03/21/vue-key/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2023/03/21/vue-key/&text=你知道vue中key的原理吗？说说你对它的理解"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2023/03/21/vue-key/&title=你知道vue中key的原理吗？说说你对它的理解"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2023/03/21/vue-key/&is_video=false&description=你知道vue中key的原理吗？说说你对它的理解"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=你知道vue中key的原理吗？说说你对它的理解&body=Check out this article: http://example.com/2023/03/21/vue-key/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2023/03/21/vue-key/&title=你知道vue中key的原理吗？说说你对它的理解"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2023/03/21/vue-key/&title=你知道vue中key的原理吗？说说你对它的理解"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2023/03/21/vue-key/&title=你知道vue中key的原理吗？说说你对它的理解"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2023/03/21/vue-key/&title=你知道vue中key的原理吗？说说你对它的理解"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2023/03/21/vue-key/&name=你知道vue中key的原理吗？说说你对它的理解&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2023/03/21/vue-key/&t=你知道vue中key的原理吗？说说你对它的理解"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2023
+    heliang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://helife.net">helife</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
