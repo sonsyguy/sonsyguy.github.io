@@ -1,13 +1,13 @@
-# Hexo Configuration
+ # Hexo Configuration
 ## Docs: https://hexo.io/docs/configuration.html
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
+title: HeLife
 subtitle: ''
-description: ''
+description: '知难上，戒骄狂，常自省，穷途明'
 keywords:
-author: John Doe
+author: heliang
 language: en
 timezone: ''
 
@@ -97,7 +97,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: cactus
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
