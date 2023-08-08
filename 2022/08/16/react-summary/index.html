@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="说说你在使用React 过程中遇到的常见问题？如何解决?  一、前言在使用react开发项目过程中，每个人或多或少都会遇到一些”奇怪”的问题，本质上都是我们对其理解的不够透彻 react 系列，33个工作日，33次凌晨还在亮起的台灯，到今天就圆满画上句号了，比心 在系列中我们列出了很多比较经典的考题，工作中遇到的问题也往往就藏中其中，只是以不同的表现形式存在罢了 今天的题解不算题解，准确来说是对整">
+<meta property="og:type" content="article">
+<meta property="og:title" content="说说你在使用React 过程中遇到的常见问题？如何解决?">
+<meta property="og:url" content="http://example.com/2022/08/16/react-summary/index.html">
+<meta property="og:site_name" content="HeLife">
+<meta property="og:description" content="说说你在使用React 过程中遇到的常见问题？如何解决?  一、前言在使用react开发项目过程中，每个人或多或少都会遇到一些”奇怪”的问题，本质上都是我们对其理解的不够透彻 react 系列，33个工作日，33次凌晨还在亮起的台灯，到今天就圆满画上句号了，比心 在系列中我们列出了很多比较经典的考题，工作中遇到的问题也往往就藏中其中，只是以不同的表现形式存在罢了 今天的题解不算题解，准确来说是对整">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://static.vue-js.com/7efcd400-f47d-11eb-ab90-d9ae814b240d.png">
+<meta property="og:image" content="https://static.vue-js.com/66c999c0-d373-11eb-85f6-6fac77c0c9b3.png">
+<meta property="og:image" content="https://static.vue-js.com/d379e420-d374-11eb-ab90-d9ae814b240d.png">
+<meta property="og:image" content="https://static.vue-js.com/27b2e930-e56b-11eb-85f6-6fac77c0c9b3.png">
+<meta property="og:image" content="https://static.vue-js.com/a2894970-f3f7-11eb-85f6-6fac77c0c9b3.png">
+<meta property="article:published_time" content="2022-08-16T11:40:14.000Z">
+<meta property="article:modified_time" content="2023-08-08T06:41:27.579Z">
+<meta property="article:author" content="heliang">
+<meta property="article:tag" content="说说你在使用React 过程中遇到的常见问题？如何解决?">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://static.vue-js.com/7efcd400-f47d-11eb-ab90-d9ae814b240d.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>说说你在使用React 过程中遇到的常见问题？如何解决?</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://helife.net">helife</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2022/09/05/vue-error/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2022/08/05/vue-directive/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2022/08/16/react-summary/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2022/08/16/react-summary/&text=说说你在使用React 过程中遇到的常见问题？如何解决?"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2022/08/16/react-summary/&title=说说你在使用React 过程中遇到的常见问题？如何解决?"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2022/08/16/react-summary/&is_video=false&description=说说你在使用React 过程中遇到的常见问题？如何解决?"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=说说你在使用React 过程中遇到的常见问题？如何解决?&body=Check out this article: http://example.com/2022/08/16/react-summary/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2022/08/16/react-summary/&title=说说你在使用React 过程中遇到的常见问题？如何解决?"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2022/08/16/react-summary/&title=说说你在使用React 过程中遇到的常见问题？如何解决?"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2022/08/16/react-summary/&title=说说你在使用React 过程中遇到的常见问题？如何解决?"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2022/08/16/react-summary/&title=说说你在使用React 过程中遇到的常见问题？如何解决?"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2022/08/16/react-summary/&name=说说你在使用React 过程中遇到的常见问题？如何解决?&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2022/08/16/react-summary/&t=说说你在使用React 过程中遇到的常见问题？如何解决?"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AF%B4%E8%AF%B4%E4%BD%A0%E5%9C%A8%E4%BD%BF%E7%94%A8React-%E8%BF%87%E7%A8%8B%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%EF%BC%9F%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3"><span class="toc-number">1.</span> <span class="toc-text">说说你在使用React 过程中遇到的常见问题？如何解决?</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%89%8D%E8%A8%80"><span class="toc-number">1.1.</span> <span class="toc-text">一、前言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#react-%E6%9C%89%E4%BB%80%E4%B9%88%E7%89%B9%E6%80%A7"><span class="toc-number">1.1.1.</span> <span class="toc-text">react 有什么特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E6%9C%89%E5%93%AA%E4%BA%9B%E4%B8%8D%E5%90%8C%E9%98%B6%E6%AE%B5%EF%BC%9F%E6%AF%8F%E4%B8%AA%E9%98%B6%E6%AE%B5%E5%AF%B9%E5%BA%94%E7%9A%84%E6%96%B9%E6%B3%95%E6%98%AF%EF%BC%9F"><span class="toc-number">1.1.2.</span> <span class="toc-text">生命周期有哪些不同阶段？每个阶段对应的方法是？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#state-%E5%92%8C-props%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">1.1.3.</span> <span class="toc-text">state 和 props有什么区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#super-%E5%92%8Csuper-props-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">1.1.4.</span> <span class="toc-text">super()和super(props)有什么区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#setState%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6%EF%BC%9F"><span class="toc-number">1.1.5.</span> <span class="toc-text">setState执行机制？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#React%E7%9A%84%E4%BA%8B%E4%BB%B6%E6%9C%BA%E5%88%B6%EF%BC%9F"><span class="toc-number">1.1.6.</span> <span class="toc-text">React的事件机制？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E7%BB%91%E5%AE%9A%E7%9A%84%E6%96%B9%E5%BC%8F%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-number">1.1.7.</span> <span class="toc-text">事件绑定的方式有哪些？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%84%E5%BB%BA%E7%BB%84%E4%BB%B6%E7%9A%84%E6%96%B9%E5%BC%8F%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">1.1.8.</span> <span class="toc-text">构建组件的方式有哪些？区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%E4%B9%8B%E9%97%B4%E5%A6%82%E4%BD%95%E9%80%9A%E4%BF%A1%EF%BC%9F"><span class="toc-number">1.1.9.</span> <span class="toc-text">组件之间如何通信？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#key%E6%9C%89%E4%BB%80%E4%B9%88%E4%BD%9C%E7%94%A8%EF%BC%9F"><span class="toc-number">1.1.10.</span> <span class="toc-text">key有什么作用？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#refs-%E7%9A%84%E7%90%86%E8%A7%A3%EF%BC%9F%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%EF%BC%9F"><span class="toc-number">1.1.11.</span> <span class="toc-text">refs 的理解？应用场景？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hooks%E7%9A%84%E7%90%86%E8%A7%A3%EF%BC%9F%E8%A7%A3%E5%86%B3%E4%BA%86%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F"><span class="toc-number">1.1.12.</span> <span class="toc-text">Hooks的理解？解决了什么问题？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%BC%95%E5%85%A5css%EF%BC%9F"><span class="toc-number">1.1.13.</span> <span class="toc-text">如何引入css？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#redux%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%EF%BC%9F"><span class="toc-number">1.1.14.</span> <span class="toc-text">redux工作原理？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#redux%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-number">1.1.15.</span> <span class="toc-text">redux中间件有哪些？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#react-router%E7%BB%84%E4%BB%B6%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-number">1.1.16.</span> <span class="toc-text">react-router组件有哪些？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#render%E8%A7%A6%E5%8F%91%E6%97%B6%E6%9C%BA%EF%BC%9F"><span class="toc-number">1.1.17.</span> <span class="toc-text">render触发时机？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%87%8F%E5%B0%91render%EF%BC%9F"><span class="toc-number">1.1.18.</span> <span class="toc-text">如何减少render？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JSX%E8%BD%AC%E5%8C%96DOM%E8%BF%87%E7%A8%8B%EF%BC%9F"><span class="toc-number">1.1.19.</span> <span class="toc-text">JSX转化DOM过程？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%89%8B%E6%AE%B5%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="toc-number">1.1.20.</span> <span class="toc-text">性能优化手段有哪些</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%81%9A%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%B8%B2%E6%9F%93%EF%BC%9F"><span class="toc-number">1.1.21.</span> <span class="toc-text">如何做服务端渲染？</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        说说你在使用React 过程中遇到的常见问题？如何解决?
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">heliang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-08-16T11:40:14.000Z" itemprop="datePublished">2022-08-16</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/react/">react</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/%E8%AF%B4%E8%AF%B4%E4%BD%A0%E5%9C%A8%E4%BD%BF%E7%94%A8React-%E8%BF%87%E7%A8%8B%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%EF%BC%9F%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3/" rel="tag">说说你在使用React 过程中遇到的常见问题？如何解决?</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="说说你在使用React-过程中遇到的常见问题？如何解决"><a href="#说说你在使用React-过程中遇到的常见问题？如何解决" class="headerlink" title="说说你在使用React 过程中遇到的常见问题？如何解决?"></a>说说你在使用React 过程中遇到的常见问题？如何解决?</h1><p> <img src="https://static.vue-js.com/7efcd400-f47d-11eb-ab90-d9ae814b240d.png"></p>
+<h2 id="一、前言"><a href="#一、前言" class="headerlink" title="一、前言"></a>一、前言</h2><p>在使用<code>react</code>开发项目过程中，每个人或多或少都会遇到一些”奇怪”的问题，本质上都是我们对其理解的不够透彻</p>
+<p><code>react</code> 系列，33个工作日，33次凌晨还在亮起的台灯，到今天就圆满画上句号了，比心</p>
+<p>在系列中我们列出了很多比较经典的考题，工作中遇到的问题也往往就藏中其中，只是以不同的表现形式存在罢了</p>
+<p>今天的题解不算题解，准确来说是对整个系列的一次贯穿，总结</p>
+<p>目录:</p>
+<ul>
+<li>react 有什么特性</li>
+<li>生命周期有哪些不同阶段？每个阶段对应的方法是？</li>
+<li>state 和 props有什么区别？</li>
+<li>super()和super(props)有什么区别？</li>
+<li>setState执行机制？</li>
+<li>React的事件机制？</li>
+<li>事件绑定的方式有哪些？</li>
+<li>构建组件的方式有哪些？区别？</li>
+<li>组件之间如何通信？</li>
+<li>key有什么作用？</li>
+<li>refs 的理解？应用场景？</li>
+<li>Hooks的理解？解决了什么问题？</li>
+<li>如何引入css？</li>
+<li>redux工作原理？</li>
+<li>redux中间件有哪些？</li>
+<li>react-router组件有哪些？</li>
+<li>render触发时机？</li>
+<li>如何减少render？</li>
+<li>JSX转化DOM过程？</li>
+<li>性能优化手段有哪些</li>
+<li>如何做服务端渲染？</li>
+</ul>
+<h3 id="react-有什么特性"><a href="#react-有什么特性" class="headerlink" title="react 有什么特性"></a>react 有什么特性</h3><p>主要的特性分为：</p>
+<ul>
+<li>JSX语法</li>
+<li>单向数据绑定</li>
+<li>虚拟DOM</li>
+<li>声明式编程</li>
+<li>Component</li>
+</ul>
+<p>借助这些特性，<code>react</code>整体使用起来更加简单高效，组件式开发提高了代码的复用率</p>
+<h3 id="生命周期有哪些不同阶段？每个阶段对应的方法是？"><a href="#生命周期有哪些不同阶段？每个阶段对应的方法是？" class="headerlink" title="生命周期有哪些不同阶段？每个阶段对应的方法是？"></a>生命周期有哪些不同阶段？每个阶段对应的方法是？</h3><p>主要分成了新的生命周期和旧的生命周期：</p>
+<ul>
+<li><p>新版生命周期整体流程如下图所示：</p>
+<p> <img src="https://static.vue-js.com/66c999c0-d373-11eb-85f6-6fac77c0c9b3.png"></p>
+<p>旧的生命周期流程图如下：</p>
+<p><img src="https://static.vue-js.com/d379e420-d374-11eb-ab90-d9ae814b240d.png"></p>
+</li>
+</ul>
+<h3 id="state-和-props有什么区别？"><a href="#state-和-props有什么区别？" class="headerlink" title="state 和 props有什么区别？"></a>state 和 props有什么区别？</h3><p>两者相同点：</p>
+<ul>
+<li>两者都是 JavaScript 对象</li>
+<li>两者都是用于保存信息</li>
+<li>props 和 state 都能触发渲染更新</li>
+</ul>
+<p>区别：</p>
+<ul>
+<li>props 是外部传递给组件的，而 state 是在组件内被组件自己管理的，一般在 constructor 中初始化</li>
+<li>props 在组件内部是不可修改的，但 state 在组件内部可以进行修改</li>
+<li>state 是多变的、可以修改</li>
+</ul>
+<h3 id="super-和super-props-有什么区别？"><a href="#super-和super-props-有什么区别？" class="headerlink" title="super()和super(props)有什么区别？"></a>super()和super(props)有什么区别？</h3><p>在<code>React</code>中，类组件基于<code>ES6</code>，所以在<code>constructor</code>中必须使用<code>super</code></p>
+<p>在调用<code>super</code>过程，无论是否传入<code>props</code>，<code>React</code>内部都会将<code>porps</code>赋值给组件实例<code>porps</code>属性中</p>
+<p>如果只调用了<code>super()</code>，那么<code>this.props</code>在<code>super()</code>和构造函数结束之间仍是<code>undefined</code></p>
+<h3 id="setState执行机制？"><a href="#setState执行机制？" class="headerlink" title="setState执行机制？"></a>setState执行机制？</h3><p>在<code>react</code>类组件的状态需要通过<code>setState</code>进行更改，在不同场景下对应不同的执行顺序：</p>
+<ul>
+<li>在组件生命周期或React合成事件中，setState是异步</li>
+<li>在setTimeout或者原生dom事件中，setState是同步</li>
+</ul>
+<p>当我们批量更改<code>state</code>的值的时候，<code>react</code>内部会将其进行覆盖，只取最后一次的执行结果</p>
+<p>当需要下一个<code>state</code>依赖当前<code>state</code>的时候，则可以在<code>setState</code>中传递一个回调函数进行下次更新</p>
+<h3 id="React的事件机制？"><a href="#React的事件机制？" class="headerlink" title="React的事件机制？"></a>React的事件机制？</h3><p><code>React</code>基于浏览器的事件机制自身实现了一套事件机制，包括事件注册、事件的合成、事件冒泡、事件派发等</p>
+<p>组件注册的事件最终会绑定在<code>document</code>这个 <code>DOM </code>上，而不是 <code>React </code>组件对应的 <code>DOM</code>，从而节省内存开销</p>
+<p>自身实现了一套事件冒泡机制，阻止不同时间段的冒泡行为，需要对应使用不同的方法</p>
+<h3 id="事件绑定的方式有哪些？"><a href="#事件绑定的方式有哪些？" class="headerlink" title="事件绑定的方式有哪些？"></a>事件绑定的方式有哪些？</h3><p><code>react</code>常见的绑定方式有如下：</p>
+<ul>
+<li>render方法中使用bind</li>
+<li>render方法中使用箭头函数</li>
+<li>constructor中bind</li>
+<li>定义阶段使用箭头函数绑定</li>
+</ul>
+<p>前两种方式在每次组件<code>render</code>的时候都会生成新的方法实例，性能问题欠缺</p>
+<h3 id="构建组件的方式有哪些？区别？"><a href="#构建组件的方式有哪些？区别？" class="headerlink" title="构建组件的方式有哪些？区别？"></a>构建组件的方式有哪些？区别？</h3><p>组件的创建主要分成了三种方式：</p>
+<ul>
+<li>函数式创建</li>
+<li>继承 React.Component 创建</li>
+<li>通过 React.createClass 方法创建</li>
+</ul>
+<p>如今一般都是前两种方式，对于一些无状态的组件创建，建议使用函数式创建的方式，再比如<code>hooks</code>的机制下，函数式组件能做类组件对应的事情，所以建议都使用函数式的方式来创建组件</p>
+<h3 id="组件之间如何通信？"><a href="#组件之间如何通信？" class="headerlink" title="组件之间如何通信？"></a>组件之间如何通信？</h3><p>组件间通信可以通过<code>props</code>、传递回调函数、<code>context</code>、<code>redux</code>等形式进行组件之间通讯</p>
+<h3 id="key有什么作用？"><a href="#key有什么作用？" class="headerlink" title="key有什么作用？"></a>key有什么作用？</h3><p>使用<code>key</code>是<code>react</code>性能优化的手段，在一系列数据最前面插入元素，如果没有<code>key</code>的值，则所有的元素都需要进行更换，而有<code>key</code>的情况只需要将最新元素插入到前面，不涉及删除操作</p>
+<p>在使用<code>key</code>的时候应保证：</p>
+<ul>
+<li>key 应该是唯一的</li>
+<li>key不要使用随机值（随机数在下一次 render 时，会重新生成一个数字）</li>
+<li>避免使用 index 作为 key</li>
+</ul>
+<h3 id="refs-的理解？应用场景？"><a href="#refs-的理解？应用场景？" class="headerlink" title="refs 的理解？应用场景？"></a>refs 的理解？应用场景？</h3><p><code>Refs</code>允许我们访问 <code>DOM </code>节点或在 <code>render </code>方法中创建的 <code>React </code>元素</p>
+<p>下面的场景使用<code>refs</code>非常有用：</p>
+<ul>
+<li>对Dom元素的焦点控制、内容选择、控制</li>
+<li>对Dom元素的内容设置及媒体播放</li>
+<li>对Dom元素的操作和对组件实例的操作</li>
+<li>集成第三方 DOM 库</li>
+</ul>
+<h3 id="Hooks的理解？解决了什么问题？"><a href="#Hooks的理解？解决了什么问题？" class="headerlink" title="Hooks的理解？解决了什么问题？"></a>Hooks的理解？解决了什么问题？</h3><p><code>Hook</code> 是 React 16.8 的新增特性。它可以让你在不编写 <code>class</code> 的情况下使用 <code>state</code> 以及其他的 <code>React</code> 特性</p>
+<p>解决问题如下：</p>
+<ul>
+<li>难以重用和共享组件中的与状态相关的逻辑</li>
+<li>逻辑复杂的组件难以开发与维护，当我们的组件需要处理多个互不相关的 local state 时，每个生命周期函数中可能会包含着各种互不相关的逻辑在里面</li>
+<li>类组件中的this增加学习成本，类组件在基于现有工具的优化上存在些许问题</li>
+<li>由于业务变动，函数组件不得不改为类组件等等</li>
+</ul>
+<h3 id="如何引入css？"><a href="#如何引入css？" class="headerlink" title="如何引入css？"></a>如何引入css？</h3><p>常见的<code>CSS</code>引入方式有以下：</p>
+<ul>
+<li>在组件内直接使用</li>
+<li>组件中引入 .css 文件</li>
+<li>组件中引入 .module.css 文件</li>
+<li>CSS in JS</li>
+</ul>
+<p>组件内直接使用<code>css</code>会导致大量的代码，而文件中直接引入<code>css</code>文件是全局作用域，发生层叠</p>
+<p>引入<code>.module.css </code>文件能够解决局部作用域问题，但是不方便动态修改样式，需要使用内联的方式进行样式的编写</p>
+<p><code>css in js </code>这种方法，可以满足大部分场景的应用，可以类似于预处理器一样样式嵌套、定义、修改状态等</p>
+<h3 id="redux工作原理？"><a href="#redux工作原理？" class="headerlink" title="redux工作原理？"></a>redux工作原理？</h3><p><code>redux </code>要求我们把数据都放在 <code>store </code>公共存储空间</p>
+<p>一个组件改变了 <code>store</code> 里的数据内容，其他组件就能感知到 <code>store </code>的变化，再来取数据，从而间接的实现了这些数据传递的功能</p>
+<p>工作流程图如下所示：</p>
+<p> <img src="https://static.vue-js.com/27b2e930-e56b-11eb-85f6-6fac77c0c9b3.png"></p>
+<h3 id="redux中间件有哪些？"><a href="#redux中间件有哪些？" class="headerlink" title="redux中间件有哪些？"></a>redux中间件有哪些？</h3><p>市面上有很多优秀的<code>redux</code>中间件，如：</p>
+<ul>
+<li>redux-thunk：用于异步操作</li>
+<li>redux-logger：用于日志记录</li>
+</ul>
+<h3 id="react-router组件有哪些？"><a href="#react-router组件有哪些？" class="headerlink" title="react-router组件有哪些？"></a>react-router组件有哪些？</h3><p>常见的组件有：</p>
+<ul>
+<li>BrowserRouter、HashRouter</li>
+<li>Route</li>
+<li>Link、NavLink</li>
+<li>switch</li>
+<li>redirect</li>
+</ul>
+<h3 id="render触发时机？"><a href="#render触发时机？" class="headerlink" title="render触发时机？"></a>render触发时机？</h3><p>在<code> React</code> 中，类组件只要执行了 <code>setState</code> 方法，就一定会触发 <code>render</code> 函数执行</p>
+<p>函数组件<code>useState</code> 会判断当前值有无发生改变确定是否执行<code>render</code>方法，一旦父组件发生渲染，子组件也会渲染</p>
+<h3 id="如何减少render？"><a href="#如何减少render？" class="headerlink" title="如何减少render？"></a>如何减少render？</h3><p>父组件渲染导致子组件渲染，子组件并没有发生任何改变，这时候就可以从避免无谓的渲染，具体实现的方式有如下：</p>
+<ul>
+<li>shouldComponentUpdate</li>
+<li>PureComponent</li>
+<li>React.memo</li>
+</ul>
+<h3 id="JSX转化DOM过程？"><a href="#JSX转化DOM过程？" class="headerlink" title="JSX转化DOM过程？"></a>JSX转化DOM过程？</h3><p><code>jsx</code>首先会转化成<code>React.createElement</code>这种形式，<code>React.createElement</code>作用是生成一个虚拟<code>Dom</code>对象，然后会通过<code>ReactDOM.render</code>进行渲染成真实<code>DOM</code></p>
+<h3 id="性能优化手段有哪些"><a href="#性能优化手段有哪些" class="headerlink" title="性能优化手段有哪些"></a>性能优化手段有哪些</h3><p>除了减少<code>render</code>的渲染之外，还可以通过以下手段进行优化：</p>
+<p>除此之外， 常见性能优化常见的手段有如下：</p>
+<ul>
+<li>避免使用内联函数</li>
+<li>使用 React Fragments 避免额外标记</li>
+<li>使用 Immutable</li>
+<li>懒加载组件</li>
+<li>事件绑定方式</li>
+<li>服务端渲染</li>
+</ul>
+<h3 id="如何做服务端渲染？"><a href="#如何做服务端渲染？" class="headerlink" title="如何做服务端渲染？"></a>如何做服务端渲染？</h3><p><code>node server</code> 接收客户端请求，得到当前的请求<code>url</code> 路径，然后在已有的路由表内查找到对应的组件，拿到需要请求的数据，将数据作为 <code>props</code>、<code>context</code>或者<code>store</code> 形式传入组件</p>
+<p>然后基于 <code>react</code> 内置的服务端渲染方法 <code>renderToString()</code>把组件渲染为 <code>html</code>字符串在把最终的 <code>html </code>进行输出前需要将数据注入到浏览器端</p>
+<p>浏览器开始进行渲染和节点对比，然后执行完成组件内事件绑定和一些交互，浏览器重用了服务端输出的 <code>html</code> 节点，整个流程结束</p>
+<p> <img src="https://static.vue-js.com/a2894970-f3f7-11eb-85f6-6fac77c0c9b3.png"></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://helife.net">helife</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E8%AF%B4%E8%AF%B4%E4%BD%A0%E5%9C%A8%E4%BD%BF%E7%94%A8React-%E8%BF%87%E7%A8%8B%E4%B8%AD%E9%81%87%E5%88%B0%E7%9A%84%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%EF%BC%9F%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3"><span class="toc-number">1.</span> <span class="toc-text">说说你在使用React 过程中遇到的常见问题？如何解决?</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%89%8D%E8%A8%80"><span class="toc-number">1.1.</span> <span class="toc-text">一、前言</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#react-%E6%9C%89%E4%BB%80%E4%B9%88%E7%89%B9%E6%80%A7"><span class="toc-number">1.1.1.</span> <span class="toc-text">react 有什么特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E6%9C%89%E5%93%AA%E4%BA%9B%E4%B8%8D%E5%90%8C%E9%98%B6%E6%AE%B5%EF%BC%9F%E6%AF%8F%E4%B8%AA%E9%98%B6%E6%AE%B5%E5%AF%B9%E5%BA%94%E7%9A%84%E6%96%B9%E6%B3%95%E6%98%AF%EF%BC%9F"><span class="toc-number">1.1.2.</span> <span class="toc-text">生命周期有哪些不同阶段？每个阶段对应的方法是？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#state-%E5%92%8C-props%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">1.1.3.</span> <span class="toc-text">state 和 props有什么区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#super-%E5%92%8Csuper-props-%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">1.1.4.</span> <span class="toc-text">super()和super(props)有什么区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#setState%E6%89%A7%E8%A1%8C%E6%9C%BA%E5%88%B6%EF%BC%9F"><span class="toc-number">1.1.5.</span> <span class="toc-text">setState执行机制？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#React%E7%9A%84%E4%BA%8B%E4%BB%B6%E6%9C%BA%E5%88%B6%EF%BC%9F"><span class="toc-number">1.1.6.</span> <span class="toc-text">React的事件机制？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8B%E4%BB%B6%E7%BB%91%E5%AE%9A%E7%9A%84%E6%96%B9%E5%BC%8F%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-number">1.1.7.</span> <span class="toc-text">事件绑定的方式有哪些？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9E%84%E5%BB%BA%E7%BB%84%E4%BB%B6%E7%9A%84%E6%96%B9%E5%BC%8F%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F%E5%8C%BA%E5%88%AB%EF%BC%9F"><span class="toc-number">1.1.8.</span> <span class="toc-text">构建组件的方式有哪些？区别？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%E4%B9%8B%E9%97%B4%E5%A6%82%E4%BD%95%E9%80%9A%E4%BF%A1%EF%BC%9F"><span class="toc-number">1.1.9.</span> <span class="toc-text">组件之间如何通信？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#key%E6%9C%89%E4%BB%80%E4%B9%88%E4%BD%9C%E7%94%A8%EF%BC%9F"><span class="toc-number">1.1.10.</span> <span class="toc-text">key有什么作用？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#refs-%E7%9A%84%E7%90%86%E8%A7%A3%EF%BC%9F%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%EF%BC%9F"><span class="toc-number">1.1.11.</span> <span class="toc-text">refs 的理解？应用场景？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Hooks%E7%9A%84%E7%90%86%E8%A7%A3%EF%BC%9F%E8%A7%A3%E5%86%B3%E4%BA%86%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98%EF%BC%9F"><span class="toc-number">1.1.12.</span> <span class="toc-text">Hooks的理解？解决了什么问题？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%BC%95%E5%85%A5css%EF%BC%9F"><span class="toc-number">1.1.13.</span> <span class="toc-text">如何引入css？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#redux%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%EF%BC%9F"><span class="toc-number">1.1.14.</span> <span class="toc-text">redux工作原理？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#redux%E4%B8%AD%E9%97%B4%E4%BB%B6%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-number">1.1.15.</span> <span class="toc-text">redux中间件有哪些？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#react-router%E7%BB%84%E4%BB%B6%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-number">1.1.16.</span> <span class="toc-text">react-router组件有哪些？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#render%E8%A7%A6%E5%8F%91%E6%97%B6%E6%9C%BA%EF%BC%9F"><span class="toc-number">1.1.17.</span> <span class="toc-text">render触发时机？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%87%8F%E5%B0%91render%EF%BC%9F"><span class="toc-number">1.1.18.</span> <span class="toc-text">如何减少render？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JSX%E8%BD%AC%E5%8C%96DOM%E8%BF%87%E7%A8%8B%EF%BC%9F"><span class="toc-number">1.1.19.</span> <span class="toc-text">JSX转化DOM过程？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E6%89%8B%E6%AE%B5%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="toc-number">1.1.20.</span> <span class="toc-text">性能优化手段有哪些</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E5%81%9A%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%B8%B2%E6%9F%93%EF%BC%9F"><span class="toc-number">1.1.21.</span> <span class="toc-text">如何做服务端渲染？</span></a></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2022/08/16/react-summary/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2022/08/16/react-summary/&text=说说你在使用React 过程中遇到的常见问题？如何解决?"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2022/08/16/react-summary/&title=说说你在使用React 过程中遇到的常见问题？如何解决?"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2022/08/16/react-summary/&is_video=false&description=说说你在使用React 过程中遇到的常见问题？如何解决?"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=说说你在使用React 过程中遇到的常见问题？如何解决?&body=Check out this article: http://example.com/2022/08/16/react-summary/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2022/08/16/react-summary/&title=说说你在使用React 过程中遇到的常见问题？如何解决?"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2022/08/16/react-summary/&title=说说你在使用React 过程中遇到的常见问题？如何解决?"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2022/08/16/react-summary/&title=说说你在使用React 过程中遇到的常见问题？如何解决?"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2022/08/16/react-summary/&title=说说你在使用React 过程中遇到的常见问题？如何解决?"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2022/08/16/react-summary/&name=说说你在使用React 过程中遇到的常见问题？如何解决?&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2022/08/16/react-summary/&t=说说你在使用React 过程中遇到的常见问题？如何解决?"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2023
+    heliang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://helife.net">helife</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

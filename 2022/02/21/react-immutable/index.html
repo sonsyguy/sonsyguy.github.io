@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="对immutable的理解？如何应用在react项目中？  一、是什么Immutable，不可改变的，在计算机中，即指一旦创建，就不能再被更改的数据 对 Immutable 对象的任何修改或添加删除操作都会返回一个新的 Immutable 对象 Immutable 实现的原理是 Persistent Data Structure（持久化数据结构）:  用一种数据结构来保存数据 当数据被修改时，会返">
+<meta property="og:type" content="article">
+<meta property="og:title" content="对immutable的理解？如何应用在react项目中？">
+<meta property="og:url" content="http://example.com/2022/02/21/react-immutable/index.html">
+<meta property="og:site_name" content="HeLife">
+<meta property="og:description" content="对immutable的理解？如何应用在react项目中？  一、是什么Immutable，不可改变的，在计算机中，即指一旦创建，就不能再被更改的数据 对 Immutable 对象的任何修改或添加删除操作都会返回一个新的 Immutable 对象 Immutable 实现的原理是 Persistent Data Structure（持久化数据结构）:  用一种数据结构来保存数据 当数据被修改时，会返">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://static.vue-js.com/797e9470-ea3f-11eb-ab90-d9ae814b240d.png">
+<meta property="og:image" content="https://pic4.zhimg.com/80/2b4c801a7b40eefcd4ee6767fb984fdf_720w.gif">
+<meta property="article:published_time" content="2022-02-21T11:40:14.000Z">
+<meta property="article:modified_time" content="2023-08-08T06:29:00.408Z">
+<meta property="article:author" content="heliang">
+<meta property="article:tag" content="immutable">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://static.vue-js.com/797e9470-ea3f-11eb-ab90-d9ae814b240d.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>对immutable的理解？如何应用在react项目中？</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://helife.net">helife</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/2022/03/03/vue-axiosCode/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/2022/02/12/react-Real%20DOM_Virtual%20DOM/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2022/02/21/react-immutable/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2022/02/21/react-immutable/&text=对immutable的理解？如何应用在react项目中？"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2022/02/21/react-immutable/&title=对immutable的理解？如何应用在react项目中？"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2022/02/21/react-immutable/&is_video=false&description=对immutable的理解？如何应用在react项目中？"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=对immutable的理解？如何应用在react项目中？&body=Check out this article: http://example.com/2022/02/21/react-immutable/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2022/02/21/react-immutable/&title=对immutable的理解？如何应用在react项目中？"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2022/02/21/react-immutable/&title=对immutable的理解？如何应用在react项目中？"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2022/02/21/react-immutable/&title=对immutable的理解？如何应用在react项目中？"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2022/02/21/react-immutable/&title=对immutable的理解？如何应用在react项目中？"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2022/02/21/react-immutable/&name=对immutable的理解？如何应用在react项目中？&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2022/02/21/react-immutable/&t=对immutable的理解？如何应用在react项目中？"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AF%B9immutable%E7%9A%84%E7%90%86%E8%A7%A3%EF%BC%9F%E5%A6%82%E4%BD%95%E5%BA%94%E7%94%A8%E5%9C%A8react%E9%A1%B9%E7%9B%AE%E4%B8%AD%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">对immutable的理解？如何应用在react项目中？</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">1.1.</span> <span class="toc-text">一、是什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8"><span class="toc-number">1.2.</span> <span class="toc-text">二、如何使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%9C%A8React%E4%B8%AD%E5%BA%94%E7%94%A8"><span class="toc-number">1.3.</span> <span class="toc-text">三、在React中应用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">1.4.</span> <span class="toc-text">参考文献</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        对immutable的理解？如何应用在react项目中？
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">heliang</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-02-21T11:40:14.000Z" itemprop="datePublished">2022-02-21</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/react/">react</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/immutable/" rel="tag">immutable</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="对immutable的理解？如何应用在react项目中？"><a href="#对immutable的理解？如何应用在react项目中？" class="headerlink" title="对immutable的理解？如何应用在react项目中？"></a>对immutable的理解？如何应用在react项目中？</h1><p> <img src="https://static.vue-js.com/797e9470-ea3f-11eb-ab90-d9ae814b240d.png"></p>
+<h2 id="一、是什么"><a href="#一、是什么" class="headerlink" title="一、是什么"></a>一、是什么</h2><p>Immutable，不可改变的，在计算机中，即指一旦创建，就不能再被更改的数据</p>
+<p>对 <code>Immutable </code>对象的任何修改或添加删除操作都会返回一个新的 <code>Immutable </code>对象</p>
+<p><code>Immutable</code> 实现的原理是 <code>Persistent Data Structure</code>（持久化数据结构）:</p>
+<ul>
+<li>用一种数据结构来保存数据</li>
+<li>当数据被修改时，会返回一个对象，但是新的对象会尽可能的利用之前的数据结构而不会对内存造成浪费</li>
+</ul>
+<p>也就是使用旧数据创建新数据时，要保证旧数据同时可用且不变，同时为了避免 <code>deepCopy </code>把所有节点都复制一遍带来的性能损耗，<code>Immutable</code> 使用了 <code>Structural Sharing</code>（结构共享）</p>
+<p>如果对象树中一个节点发生变化，只修改这个节点和受它影响的父节点，其它节点则进行共享</p>
+<p>如下图所示：</p>
+<p><img src="https://pic4.zhimg.com/80/2b4c801a7b40eefcd4ee6767fb984fdf_720w.gif"></p>
+<h2 id="二、如何使用"><a href="#二、如何使用" class="headerlink" title="二、如何使用"></a>二、如何使用</h2><p>使用<code>Immutable</code>对象最主要的库是<code>immutable.js</code></p>
+<p>immutable.js 是一个完全独立的库，无论基于什么框架都可以用它</p>
+<p>其出现场景在于弥补 Javascript 没有不可变数据结构的问题，通过 structural sharing来解决的性能问题</p>
+<p>内部提供了一套完整的 Persistent Data Structure，还有很多易用的数据类型，如<code>Collection</code>、<code>List</code>、<code>Map</code>、<code>Set</code>、<code>Record</code>、<code>Seq</code>，其中：</p>
+<ul>
+<li><p>List: 有序索引集，类似 JavaScript 中的 Array</p>
+</li>
+<li><p>Map: 无序索引集，类似 JavaScript 中的 Object</p>
+</li>
+<li><p>Set: 没有重复值的集合</p>
+</li>
+</ul>
+<p>主要的方法如下：</p>
+<ul>
+<li>fromJS()：将一个js数据转换为Immutable类型的数据</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> obj = <span class="title class_">Immutable</span>.<span class="title function_">fromJS</span>(&#123;<span class="attr">a</span>:<span class="string">&#x27;123&#x27;</span>,<span class="attr">b</span>:<span class="string">&#x27;234&#x27;</span>&#125;)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>toJS()：将一个Immutable数据转换为JS类型的数据</li>
+<li>is()：对两个对象进行比较</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">Map</span>, is &#125; <span class="keyword">from</span> <span class="string">&#x27;immutable&#x27;</span></span><br><span class="line"><span class="keyword">const</span> map1 = <span class="title class_">Map</span>(&#123; <span class="attr">a</span>: <span class="number">1</span>, <span class="attr">b</span>: <span class="number">1</span>, <span class="attr">c</span>: <span class="number">1</span> &#125;)</span><br><span class="line"><span class="keyword">const</span> map2 = <span class="title class_">Map</span>(&#123; <span class="attr">a</span>: <span class="number">1</span>, <span class="attr">b</span>: <span class="number">1</span>, <span class="attr">c</span>: <span class="number">1</span> &#125;)</span><br><span class="line">map1 === map2   <span class="comment">//false</span></span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">is</span>(map1, map2) <span class="comment">// false</span></span><br><span class="line"><span class="title function_">is</span>(map1, map2) <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>get(key)：对数据或对象取值</p>
+</li>
+<li><p>getIn([]) ：对嵌套对象或数组取值，传参为数组，表示位置</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> abs = <span class="title class_">Immutable</span>.<span class="title function_">fromJS</span>(&#123;<span class="attr">a</span>: &#123;<span class="attr">b</span>:<span class="number">2</span>&#125;&#125;);</span><br><span class="line">abs.<span class="title function_">getIn</span>([<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>]) <span class="comment">// 2</span></span><br><span class="line">abs.<span class="title function_">getIn</span>([<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;c&#x27;</span>]) <span class="comment">// 子级没有值</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> arr = <span class="title class_">Immutable</span>.<span class="title function_">fromJS</span>([<span class="number">1</span> ,<span class="number">2</span>, <span class="number">3</span>, &#123;<span class="attr">a</span>: <span class="number">5</span>&#125;]);</span><br><span class="line">arr.<span class="title function_">getIn</span>([<span class="number">3</span>, <span class="string">&#x27;a&#x27;</span>]); <span class="comment">// 5</span></span><br><span class="line">arr.<span class="title function_">getIn</span>([<span class="number">3</span>, <span class="string">&#x27;c&#x27;</span>]); <span class="comment">// 子级没有值</span></span><br></pre></td></tr></table></figure>
+
+<p>- </p>
+<p>如下例子：使用方法如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">Immutable</span> <span class="keyword">from</span> <span class="string">&#x27;immutable&#x27;</span>;</span><br><span class="line">foo = <span class="title class_">Immutable</span>.<span class="title function_">fromJS</span>(&#123;<span class="attr">a</span>: &#123;<span class="attr">b</span>: <span class="number">1</span>&#125;&#125;);</span><br><span class="line">bar = foo.<span class="title function_">setIn</span>([<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>], <span class="number">2</span>);   <span class="comment">// 使用 setIn 赋值</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(foo.<span class="title function_">getIn</span>([<span class="string">&#x27;a&#x27;</span>, <span class="string">&#x27;b&#x27;</span>]));  <span class="comment">// 使用 getIn 取值，打印 1</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(foo === bar);  <span class="comment">//  打印 false</span></span><br></pre></td></tr></table></figure>
+
+<p>如果换到原生的<code>js</code>，则对应如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> foo = &#123;<span class="attr">a</span>: &#123;<span class="attr">b</span>: <span class="number">1</span>&#125;&#125;;</span><br><span class="line"><span class="keyword">let</span> bar = foo;</span><br><span class="line">bar.<span class="property">a</span>.<span class="property">b</span> = <span class="number">2</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(foo.<span class="property">a</span>.<span class="property">b</span>);  <span class="comment">// 打印 2</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(foo === bar);  <span class="comment">//  打印 true</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="三、在React中应用"><a href="#三、在React中应用" class="headerlink" title="三、在React中应用"></a>三、在React中应用</h2><p>使用 <code>Immutable </code>可以给 <code>React</code> 应用带来性能的优化，主要体现在减少渲染的次数</p>
+<p>在做<code>react</code>性能优化的时候，为了避免重复渲染，我们会在<code>shouldComponentUpdate()</code>中做对比，当返回<code>true</code>执行<code>render</code>方法</p>
+<p><code>Immutable</code>通过<code>is</code>方法则可以完成对比，而无需像一样通过深度比较的方式比较</p>
+<p>在使用<code>redux</code>过程中也可以结合<code>Immutable</code>，不使用<code>Immutable</code>前修改一个数据需要做一个深拷贝</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;_&#x27;</span> <span class="keyword">from</span> <span class="string">&#x27;lodash&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">Component</span> = <span class="title class_">React</span>.<span class="title function_">createClass</span>(&#123;</span><br><span class="line">  <span class="title function_">getInitialState</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">data</span>: &#123; <span class="attr">times</span>: <span class="number">0</span> &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="title function_">handleAdd</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">let</span> data = _.<span class="title function_">cloneDeep</span>(<span class="variable language_">this</span>.<span class="property">state</span>.<span class="property">data</span>);</span><br><span class="line">    data.<span class="property">times</span> = data.<span class="property">times</span> + <span class="number">1</span>;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">setState</span>(&#123; <span class="attr">data</span>: data &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>使用 Immutable 后：</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">getInitialState</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">data</span>: <span class="title class_">Map</span>(&#123; <span class="attr">times</span>: <span class="number">0</span> &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br><span class="line">  <span class="title function_">handleAdd</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="title function_">setState</span>(&#123; <span class="attr">data</span>: <span class="variable language_">this</span>.<span class="property">state</span>.<span class="property">data</span>.<span class="title function_">update</span>(<span class="string">&#x27;times&#x27;</span>, <span class="function"><span class="params">v</span> =&gt;</span> v + <span class="number">1</span>) &#125;);</span><br><span class="line">    <span class="comment">// 这时的 times 并不会改变</span></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="variable language_">this</span>.<span class="property">state</span>.<span class="property">data</span>.<span class="title function_">get</span>(<span class="string">&#x27;times&#x27;</span>));</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+
+<p>同理，在<code>redux</code>中也可以将数据进行<code>fromJS</code>处理</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> constants <span class="keyword">from</span> <span class="string">&#x27;./constants&#x27;</span></span><br><span class="line"><span class="keyword">import</span> &#123;fromJS&#125; <span class="keyword">from</span> <span class="string">&#x27;immutable&#x27;</span></span><br><span class="line"><span class="keyword">const</span> defaultState = <span class="title function_">fromJS</span>(&#123; <span class="comment">//将数据转化成immutable数据</span></span><br><span class="line">    <span class="attr">home</span>:<span class="literal">true</span>,</span><br><span class="line">    <span class="attr">focused</span>:<span class="literal">false</span>,</span><br><span class="line">    <span class="attr">mouseIn</span>:<span class="literal">false</span>,</span><br><span class="line">    <span class="attr">list</span>:[],</span><br><span class="line">    <span class="attr">page</span>:<span class="number">1</span>,</span><br><span class="line">    <span class="attr">totalPage</span>:<span class="number">1</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="keyword">export</span> <span class="title function_">default</span>(state=defaultState,action)=&gt;&#123;</span><br><span class="line">    <span class="keyword">switch</span>(action.<span class="property">type</span>)&#123;</span><br><span class="line">        <span class="keyword">case</span> constants.<span class="property">SEARCH_FOCUS</span>:</span><br><span class="line">            <span class="keyword">return</span> state.<span class="title function_">set</span>(<span class="string">&#x27;focused&#x27;</span>,<span class="literal">true</span>) <span class="comment">//更改immutable数据</span></span><br><span class="line">        <span class="keyword">case</span> constants.<span class="property">CHANGE_HOME_ACTIVE</span>:</span><br><span class="line">            <span class="keyword">return</span> state.<span class="title function_">set</span>(<span class="string">&#x27;home&#x27;</span>,action.<span class="property">value</span>)</span><br><span class="line">        <span class="keyword">case</span> constants.<span class="property">SEARCH_BLUR</span>:</span><br><span class="line">            <span class="keyword">return</span> state.<span class="title function_">set</span>(<span class="string">&#x27;focused&#x27;</span>,<span class="literal">false</span>)</span><br><span class="line">        <span class="keyword">case</span> constants.<span class="property">CHANGE_LIST</span>:</span><br><span class="line">            <span class="comment">// return state.set(&#x27;list&#x27;,action.data).set(&#x27;totalPage&#x27;,action.totalPage)</span></span><br><span class="line">            <span class="comment">//merge效率更高，执行一次改变多个数据</span></span><br><span class="line">            <span class="keyword">return</span> state.<span class="title function_">merge</span>(&#123;</span><br><span class="line">                <span class="attr">list</span>:action.<span class="property">data</span>,</span><br><span class="line">                <span class="attr">totalPage</span>:action.<span class="property">totalPage</span></span><br><span class="line">            &#125;)</span><br><span class="line">        <span class="keyword">case</span> constants.<span class="property">MOUSE_ENTER</span>:</span><br><span class="line">            <span class="keyword">return</span> state.<span class="title function_">set</span>(<span class="string">&#x27;mouseIn&#x27;</span>,<span class="literal">true</span>)</span><br><span class="line">        <span class="keyword">case</span> constants.<span class="property">MOUSE_LEAVE</span>:</span><br><span class="line">            <span class="keyword">return</span> state.<span class="title function_">set</span>(<span class="string">&#x27;mouseIn&#x27;</span>,<span class="literal">false</span>)</span><br><span class="line">        <span class="keyword">case</span> constants.<span class="property">CHANGE_PAGE</span>:</span><br><span class="line">            <span class="keyword">return</span> state.<span class="title function_">set</span>(<span class="string">&#x27;page&#x27;</span>,action.<span class="property">page</span>)</span><br><span class="line">        <span class="attr">default</span>:</span><br><span class="line">            <span class="keyword">return</span> state</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/20295971?spm=a2c4e.11153940.blogcont69516.18.4f275a00EzBHjr&columnSlug=purerender">https://zhuanlan.zhihu.com/p/20295971?spm=a2c4e.11153940.blogcont69516.18.4f275a00EzBHjr&amp;columnSlug=purerender</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/7bf04638e82a">https://www.jianshu.com/p/7bf04638e82a</a></li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="/search/">Search</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://helife.net">helife</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AF%B9immutable%E7%9A%84%E7%90%86%E8%A7%A3%EF%BC%9F%E5%A6%82%E4%BD%95%E5%BA%94%E7%94%A8%E5%9C%A8react%E9%A1%B9%E7%9B%AE%E4%B8%AD%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">对immutable的理解？如何应用在react项目中？</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">1.1.</span> <span class="toc-text">一、是什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8"><span class="toc-number">1.2.</span> <span class="toc-text">二、如何使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%9C%A8React%E4%B8%AD%E5%BA%94%E7%94%A8"><span class="toc-number">1.3.</span> <span class="toc-text">三、在React中应用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE"><span class="toc-number">1.4.</span> <span class="toc-text">参考文献</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2022/02/21/react-immutable/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2022/02/21/react-immutable/&text=对immutable的理解？如何应用在react项目中？"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2022/02/21/react-immutable/&title=对immutable的理解？如何应用在react项目中？"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2022/02/21/react-immutable/&is_video=false&description=对immutable的理解？如何应用在react项目中？"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=对immutable的理解？如何应用在react项目中？&body=Check out this article: http://example.com/2022/02/21/react-immutable/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2022/02/21/react-immutable/&title=对immutable的理解？如何应用在react项目中？"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2022/02/21/react-immutable/&title=对immutable的理解？如何应用在react项目中？"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2022/02/21/react-immutable/&title=对immutable的理解？如何应用在react项目中？"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2022/02/21/react-immutable/&title=对immutable的理解？如何应用在react项目中？"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2022/02/21/react-immutable/&name=对immutable的理解？如何应用在react项目中？&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2022/02/21/react-immutable/&t=对immutable的理解？如何应用在react项目中？"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2023
+    heliang
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a href="/search/">Search</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://helife.net">helife</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
